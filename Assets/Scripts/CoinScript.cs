@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CoinScript : MonoBehaviour
 {
-    [SerializeField] private GameManager gameManager;
+    private GameManager gameManager;
+
+    [Header("Coin Value")]
     [SerializeField] private int worth;
     // Start is called before the first frame update
     void Start()

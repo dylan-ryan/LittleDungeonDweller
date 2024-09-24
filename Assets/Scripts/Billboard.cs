@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour
 {
+    //Put this script on Enemies that need to face camera (Does not work for player)
+    
     private Transform cameraTransform;
 
     private void Start()

@@ -591,10 +591,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1287296832}
   - component: {fileID: 1287296833}
+  - component: {fileID: 1287296835}
   - component: {fileID: 1287296829}
   - component: {fileID: 1287296828}
   - component: {fileID: 1287296834}
-  - component: {fileID: 1287296835}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -679,15 +679,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da4103f91ef2b54591c9059a2c5309a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 1
-  _moveSpeed: 10
+  moveSpeed: 10
   swordRadius: 1.5
   swordRange: 2
+  attackDamage: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  gravity: -10
-  groundCheckDistance: 0.1
 --- !u!212 &1287296834
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -824,11 +822,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2127428650}
   - component: {fileID: 2127428653}
-  - component: {fileID: 2127428647}
-  - component: {fileID: 2127428651}
-  - component: {fileID: 2127428652}
   - component: {fileID: 2127428654}
   - component: {fileID: 2127428655}
+  - component: {fileID: 2127428647}
+  - component: {fileID: 2127428652}
+  - component: {fileID: 2127428651}
   m_Layer: 3
   m_Name: Goblin
   m_TagString: Enemy
@@ -965,6 +963,7 @@ MonoBehaviour:
   chaseRange: 100
   attackRange: 2
   attackCooldown: 2
+  attackDamage: 1
   coin: {fileID: 6389368986838399647, guid: 85bff7ba6064b9949b307bb909609fc7, type: 3}
 --- !u!114 &2127428654
 MonoBehaviour:

@@ -5,15 +5,20 @@ using UnityEngine;
 public class CharacterContoller : MonoBehaviour
 {
     private CharacterController characterController;
-    public int attackDamage = 1;
 
-    [SerializeField] private float _moveSpeed = 10f;
+    [Header("Player Movement")]
+    [SerializeField] private float moveSpeed = 10f;
+
+    [Header("Player Attack Values")]
     [SerializeField] private float swordRadius = 1.5f;
     [SerializeField] private float swordRange = 2f;
-    [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private float gravity = -9.81f;
-    [SerializeField] private float groundCheckDistance = 0.1f;
+    public int attackDamage = 1;
 
+    [Header("Unity Layer Enemies Are On")]
+    [SerializeField] private LayerMask enemyLayer;
+    
+    private float gravity = -10f;
+    private float groundCheckDistance = 0.1f;
     private Vector3 velocity;
     private Vector3 lastMoveDirection;
     private Vector3 gizmoSwipeCenter;
@@ -33,7 +38,7 @@ public class CharacterContoller : MonoBehaviour
             lastMoveDirection = move.normalized;
         }
 
-        characterController.Move(move * (Time.fixedDeltaTime * _moveSpeed));
+        characterController.Move(move * (Time.fixedDeltaTime * moveSpeed));
 
         if (characterController.isGrounded)
         {

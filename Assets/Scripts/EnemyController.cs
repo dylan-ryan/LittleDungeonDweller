@@ -5,14 +5,20 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     private enum EnemyState { Patrol, Chase, Attack }
-    [SerializeField] private EnemyState currentState;
 
+    [Header("Enemy States")]
+    [SerializeField] private EnemyState currentState;
     [SerializeField] private Transform[] patrolPoints;
     [SerializeField] private float chaseRange = 10f;
+
+    [Header("Enemy Attack Values")]
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private float attackCooldown = 2f;
+    [SerializeField] private int attackDamage = 1;
 
+    [Header("Coin Enemy Drops")]
     public GameObject coin;
+
     private HealthSystem healthSystem;
     private NavMeshAgent agent;
     private Transform player;
@@ -95,6 +101,8 @@ public class EnemyController : MonoBehaviour
         attackTimer -= Time.deltaTime;
         if (attackTimer <= 0f)
         {
+            HealthSystem playerHealth = player.GetComponent<HealthSystem>();
+            playerHealth.TakeDamage(attackDamage);
             Debug.Log("Enemy attacks the player!");
             attackTimer = attackCooldown;
         }
