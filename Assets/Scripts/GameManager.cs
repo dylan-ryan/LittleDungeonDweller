@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager manager;
+    public int currency;
 
     void Awake()
     {
@@ -19,6 +20,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void AddCurrency(int gained)
+    {
+        currency = currency + gained;
     }
 
     // Update is called once per frame

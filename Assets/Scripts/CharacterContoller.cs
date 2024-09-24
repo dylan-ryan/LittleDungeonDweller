@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterContoller : MonoBehaviour
 {
     private CharacterController characterController;
+    public int attackDamage = 1;
 
     [SerializeField] private float _moveSpeed = 10f;
     [SerializeField] private float swordRadius = 1.5f;
@@ -70,6 +71,8 @@ public class CharacterContoller : MonoBehaviour
             foreach (var hitCollider in hitColliders)
             {
                 Debug.Log("Hit " + hitCollider.name);
+                HealthSystem enemyHealth = hitCollider.GetComponent<HealthSystem>();
+                enemyHealth.TakeDamage(attackDamage);
             }
         }
         else
