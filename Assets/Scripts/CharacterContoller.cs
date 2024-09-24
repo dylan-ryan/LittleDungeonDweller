@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class CharacterContoller : MonoBehaviour
 {
     private CharacterController characterController;
+
     [SerializeField] private float _moveSpeed = 10f;
     [SerializeField] private float swordRadius = 1.5f;
     [SerializeField] private float swordRange = 2f;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float groundCheckDistance = 0.1f;
 
+    private Vector3 velocity;
     private Vector3 lastMoveDirection;
     private Vector3 gizmoSwipeCenter;
     private float gizmoSwipeRadius;
@@ -30,6 +33,16 @@ public class CharacterContoller : MonoBehaviour
         }
 
         characterController.Move(move * (Time.fixedDeltaTime * _moveSpeed));
+
+        if (characterController.isGrounded)
+        {
+            velocity.y = -groundCheckDistance;
+        }
+        else
+        {
+            velocity.y += gravity * Time.fixedDeltaTime;
+        }
+        characterController.Move(velocity * Time.fixedDeltaTime);
     }
 
     private void Update()
@@ -42,7 +55,6 @@ public class CharacterContoller : MonoBehaviour
 
     public void Attack()
     {
-
         Vector3 swipeCenter = transform.position + lastMoveDirection * swordRange;
 
         gizmoSwipeCenter = swipeCenter;
