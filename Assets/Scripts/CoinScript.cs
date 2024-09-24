@@ -15,12 +15,12 @@ public class CoinScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other == gameObject.CompareTag("Player"))
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if(other == player.CompareTag("Player"))
         {
             gameManager.AddCurrency(worth);
             Destroy(gameObject);

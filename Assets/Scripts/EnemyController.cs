@@ -12,9 +12,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private float attackCooldown = 2f;
 
-    private Vector3 lastMoveDirection;
-    private Quaternion lastRotateDirection;
-
     public GameObject coin;
     private HealthSystem healthSystem;
     private NavMeshAgent agent;
@@ -34,13 +31,6 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        Vector3 move = new();
-
-        if (move != Vector3.zero)
-        {
-            lastMoveDirection = move.normalized;
-        }
-
         switch (currentState)
         {
             case EnemyState.Patrol:
@@ -75,8 +65,9 @@ public class EnemyController : MonoBehaviour
 
         if (healthSystem.health <= 0)
         {
-            Instantiate(coin, new Vector3 (lastMoveDirection.y, lastMoveDirection.x), lastRotateDirection);
+            Vector3 enemyLocation = transform.position;
             Destroy(gameObject);
+            Instantiate(coin, enemyLocation, Quaternion.identity);
         }
     }
 
