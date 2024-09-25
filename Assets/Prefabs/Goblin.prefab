@@ -53,7 +53,7 @@ MonoBehaviour:
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
-  chaseRange: 2
+  chaseRange: 10
   attackRange: 2
   attackCooldown: 2
   attackDamage: 1
