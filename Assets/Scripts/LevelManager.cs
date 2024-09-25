@@ -46,6 +46,11 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void ButtonResume()
+    {
+        UIManager.gameState = UIManager.GameState.Gameplay;
+    }
+
     public void ButtonQuit()
     {
         Application.Quit();
