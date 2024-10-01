@@ -57,7 +57,7 @@ MonoBehaviour:
   attackRange: 3
   attackCooldown: 5
   attackDamage: 3
-  coin: {fileID: 6389368986838399647, guid: 85bff7ba6064b9949b307bb909609fc7, type: 3}
+  coin: {fileID: 6389368986838399647, guid: 34f8d71d69109534e8fbd248b43f93a3, type: 3}
 --- !u!114 &1671449692171366454
 MonoBehaviour:
   m_ObjectHideFlags: 0
