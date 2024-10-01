@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1566846230313993661}
   - component: {fileID: 1799749714633749269}
   m_Layer: 3
-  m_Name: Goblin
+  m_Name: Ogre
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.45, y: 1, z: 19.15}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.9999999, y: 1.9999999, z: 1.9999999}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -54,9 +54,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   chaseRange: 10
-  attackRange: 5
-  attackCooldown: 2
-  attackDamage: 1
+  attackRange: 3
+  attackCooldown: 5
+  attackDamage: 3
   coin: {fileID: 6389368986838399647, guid: 85bff7ba6064b9949b307bb909609fc7, type: 3}
 --- !u!114 &1671449692171366454
 MonoBehaviour:
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556a10bd40bb9ef45bf3a83059d3ecf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 5
 --- !u!136 &124625536267209858
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -114,9 +114,9 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5711824368328486100}
   m_Enabled: 1
-  m_AgentTypeID: -1372625422
+  m_AgentTypeID: -334000983
   m_Radius: 0.85714287
-  m_Speed: 3.5
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -169,7 +169,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 58f818c758ab05e4da676cc99243792e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 15f908332065a584cb8f6c9d7baacacf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
