@@ -1,20 +1,25 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-   
-        public int health;
+    public int health;
+    private Renderer objRenderer;
+
+    private void Start()
+    {
+        objRenderer = gameObject.GetComponent<Renderer>();
+    }
 
     public HealthSystem(int health)
     {
         this.health = health;
     }
+
     public void TakeDamage(int hp)
     {
-        health = health - hp;
-        ColorWait(2);
+        health -= hp;
+        StartCoroutine(ColorWait(0.5f)); // Start the coroutine to change the color
     }
 
     public void Heal(int hp)
@@ -22,11 +27,13 @@ public class HealthSystem : MonoBehaviour
         health += hp;
     }
 
-    private IEnumerable ColorWait(int seconds)
+    private IEnumerator ColorWait(float seconds)
     {
-        gameObject.GetComponent<Renderer>().material.color = new Color(1.0f, 1.0f, 0.0f);
-        yield return new WaitForSeconds(seconds);     
-        gameObject.GetComponent<Renderer>().material.color = new Color(1.0f, 1.0f, 1.0f);
+        // Change color to red
+        objRenderer.material.color = Color.red;
+        // Wait for the specified time (1 second)
+        yield return new WaitForSeconds(seconds);
+        // Change back to the original color
+        objRenderer.material.color = Color.white;
     }
 }
-
