@@ -10,13 +10,14 @@ public class UIManager : MonoBehaviour
     public GameObject mainMenu;
     public GameObject pause;
     public GameObject gameplay;
+    public GameObject upgrade;
 
     [HideInInspector] public GameObject character;
     private SpriteRenderer characterArt;
 
     public LevelManager levelManager;
 
-    public enum GameState {MainMenu, Pause, Gameplay}
+    public enum GameState {MainMenu, Upgrade, Pause, Gameplay}
     public GameState gameState;
     void Awake()
     {
@@ -43,6 +44,9 @@ public class UIManager : MonoBehaviour
             case GameState.MainMenu:
                 MainMenuUI();
                 break;
+            case GameState.Upgrade:
+                UpgradeUI();
+                break;
             case GameState.Pause:
                 PauseUI();
                 break;
@@ -58,6 +62,11 @@ public class UIManager : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.Escape) && gameState == GameState.Pause)
         {
             gameState = GameState.Gameplay;
+        }
+
+        if(character.GetComponent<HealthSystem>().health <= 0)
+        {
+            gameState = GameState.Upgrade;
         }
     }
 
@@ -83,11 +92,28 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void UpgradeUI()
+    {
+        ManagerUpgradeUI();
+        characterArt.enabled = false;
+        character.GetComponent<CharacterContoller>().enabled = false;
+    }
+
+    public void ManagerUpgradeUI()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        pause.SetActive(false);
+        mainMenu.SetActive(false);
+        gameplay.SetActive(false);
+        upgrade.SetActive(true);
+    }
     public void ManagerMainMenuUI()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         mainMenu.SetActive(true);
+        upgrade.SetActive(false);
         pause.SetActive(false);
         gameplay.SetActive(false);
     }
@@ -97,6 +123,7 @@ public class UIManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         mainMenu.SetActive(false);
+        upgrade.SetActive(false);
         pause.SetActive(true);
         gameplay.SetActive(false);
         Time.timeScale = 0f;
@@ -109,6 +136,7 @@ public class UIManager : MonoBehaviour
         mainMenu.SetActive(false);
         pause.SetActive(false);
         gameplay.SetActive(true);
+        upgrade.SetActive(false);
         Time.timeScale = 1f;
     }
 }

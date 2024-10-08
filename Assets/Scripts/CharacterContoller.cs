@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterContoller : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class CharacterContoller : MonoBehaviour
     public static CharacterContoller manager;
     void Awake()
     {
+
         //If GameManager doesnt exist set this as the manager and dont destruction on load
         if (manager == null)
         {
@@ -38,7 +40,11 @@ public class CharacterContoller : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+
     }
+
+    
 
     private void Start()
     {

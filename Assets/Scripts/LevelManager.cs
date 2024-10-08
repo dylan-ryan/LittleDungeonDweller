@@ -30,6 +30,8 @@ public class LevelManager : MonoBehaviour
 
     public void ButtonLoad(string levelName)
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        CharacterContoller characterContoller = player.GetComponent<CharacterContoller>();
         SceneManager.LoadScene(levelName);
         if (levelName != null)
         {
@@ -44,6 +46,7 @@ public class LevelManager : MonoBehaviour
                 UIManager.gameState = UIManager.GameState.Gameplay;
             }
         }
+        player.GetComponent<HealthSystem>().health = 3;
     }
 
     public void ButtonResume()
