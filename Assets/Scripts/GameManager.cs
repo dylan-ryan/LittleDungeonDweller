@@ -7,11 +7,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager manager;
     public int currency;
+    public LevelManager levelManager;
 
     //Refrences
     private GameObject player;
     private CharacterControllerScript characterControllerScript;
-    HealthSystem healthSystem;
+    private HealthSystem healthSystem;
+    public int health = 0;
 
     void Awake()
     {
@@ -58,6 +60,6 @@ public class GameManager : MonoBehaviour
 
     public void ButtonHealth()
     {
-       healthSystem.health += 1;
+        health += 1;
     }
 }

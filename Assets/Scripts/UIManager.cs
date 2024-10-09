@@ -69,7 +69,6 @@ public class UIManager : MonoBehaviour
 
         if(character.GetComponent<HealthSystem>().health <= 0)
         {
-            SceneManager.LoadScene("Upgrade");
             gameState = GameState.Upgrade;
         }
     }
@@ -111,6 +110,7 @@ public class UIManager : MonoBehaviour
         mainMenu.SetActive(false);
         gameplay.SetActive(false);
         upgrade.SetActive(true);
+        Time.timeScale = 0f;
     }
     public void ManagerMainMenuUI()
     {

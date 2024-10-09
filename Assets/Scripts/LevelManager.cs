@@ -9,10 +9,12 @@ public class LevelManager : MonoBehaviour
     public UIManager UIManager;
 
     [SerializeField] private GameObject spawn;
+    public int starterHealth = 3;
 
     public Scene currentScene;
 
     [SerializeField] private string sceneName;
+     private GameManager gameManager;
 
     private void Update()
     {
@@ -46,7 +48,7 @@ public class LevelManager : MonoBehaviour
                 UIManager.gameState = UIManager.GameState.Gameplay;
             }
         }
-        player.GetComponent<HealthSystem>().health = 3;
+        player.GetComponent<HealthSystem>().health = starterHealth + gameManager.health;
     }
 
     public void ButtonResume()
@@ -61,6 +63,7 @@ public class LevelManager : MonoBehaviour
 
     void Awake()
     {
+        gameManager = GameObject.FindAnyObjectByType<GameManager>();
         //If GameManager doesnt exist set this as the manager and dont destruction on load
         if (manager == null)
         {
