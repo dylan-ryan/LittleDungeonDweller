@@ -11,7 +11,7 @@ public class CharacterControllerScript : MonoBehaviour
     [SerializeField] public float moveSpeed = 10f;
 
     [Header("Player Attack Values")]
-    [SerializeField] private float swordRadius = 1.5f;
+    [SerializeField] public float swordRadius = 1.5f;
     [SerializeField] public float swordRange = 2f;
     public int attackDamage = 1;
 

@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     public void ButtonRange()
     {
-        characterControllerScript.swordRange += 1f;
+        characterControllerScript.swordRadius += 1f;
     }
 
     public void ButtonSpeed()
