@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 
 public class UIManager : MonoBehaviour
@@ -17,6 +18,8 @@ public class UIManager : MonoBehaviour
 
     public LevelManager levelManager;
 
+    [SerializeField]
+    private GameManager gameManager;
     public enum GameState {MainMenu, Upgrade, Pause, Gameplay}
     public GameState gameState;
     void Awake()
@@ -66,6 +69,7 @@ public class UIManager : MonoBehaviour
 
         if(character.GetComponent<HealthSystem>().health <= 0)
         {
+            SceneManager.LoadScene("Upgrade");
             gameState = GameState.Upgrade;
         }
     }

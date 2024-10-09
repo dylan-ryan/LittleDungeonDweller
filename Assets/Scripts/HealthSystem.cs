@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    public int health;
+    public int health = 3;
     private Renderer objRenderer;
 
     private void Start()

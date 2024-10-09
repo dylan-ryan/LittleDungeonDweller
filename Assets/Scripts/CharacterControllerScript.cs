@@ -8,11 +8,11 @@ public class CharacterControllerScript : MonoBehaviour
     private CharacterController characterController;
 
     [Header("Player Movement")]
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] public float moveSpeed = 10f;
 
     [Header("Player Attack Values")]
     [SerializeField] private float swordRadius = 1.5f;
-    [SerializeField] private float swordRange = 2f;
+    [SerializeField] public float swordRange = 2f;
     public int attackDamage = 1;
 
     [Header("Unity Layer Enemies Are On")]
