@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
     public void ButtonLoad(string levelName)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        CharacterContoller characterContoller = player.GetComponent<CharacterContoller>();
+        CharacterController characterContoller = player.GetComponent<CharacterController>();
         SceneManager.LoadScene(levelName);
         if (levelName != null)
         {

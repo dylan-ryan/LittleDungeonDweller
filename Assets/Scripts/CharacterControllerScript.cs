@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CharacterContoller : MonoBehaviour
+public class CharacterControllerScript : MonoBehaviour
 {
     private CharacterController characterController;
 
@@ -25,7 +25,7 @@ public class CharacterContoller : MonoBehaviour
     private Vector3 gizmoSwipeCenter;
     private float gizmoSwipeRadius;
 
-    public static CharacterContoller manager;
+    public static CharacterControllerScript manager;
     void Awake()
     {
 
@@ -40,11 +40,7 @@ public class CharacterContoller : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-
     }
-
-    
 
     private void Start()
     {

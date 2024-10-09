@@ -74,21 +74,21 @@ public class UIManager : MonoBehaviour
     {
         ManagerMainMenuUI();
         characterArt.enabled = false;
-        character.GetComponent<CharacterContoller>().enabled = false;
+        character.GetComponent<CharacterController>().enabled = false;
 
     }
 
     public void PauseUI()
     {
         ManagerPauseUI();
-        character.GetComponent<CharacterContoller>().enabled = false;
+        character.GetComponent<CharacterController>().enabled = false;
     }
 
     public void GameplayUI()
     {
         ManagerGameplayUI();
         characterArt.enabled = true;
-        character.GetComponent<CharacterContoller>().enabled = true;
+        character.GetComponent<CharacterController>().enabled = true;
 
     }
 
@@ -96,7 +96,7 @@ public class UIManager : MonoBehaviour
     {
         ManagerUpgradeUI();
         characterArt.enabled = false;
-        character.GetComponent<CharacterContoller>().enabled = false;
+        character.GetComponent<CharacterController>().enabled = false;
     }
 
     public void ManagerUpgradeUI()

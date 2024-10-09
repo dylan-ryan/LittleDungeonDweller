@@ -766,6 +766,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98b9a7129354884c8121effe6fa1ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1122784186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1122784187}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: SpawnPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1122784187
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122784186}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1159900250
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,11 +1572,15 @@ PrefabInstance:
     - target: {fileID: 3992555187705944844, guid: 902cded6cbfc8594f912db6c1b8a8152, type: 3}
       propertyPath: spawn
       value: 
-      objectReference: {fileID: 1316262149}
+      objectReference: {fileID: 0}
     - target: {fileID: 3992555187705944844, guid: 902cded6cbfc8594f912db6c1b8a8152, type: 3}
       propertyPath: UIManager
       value: 
       objectReference: {fileID: 2028193899973700334}
+    - target: {fileID: 3992555187705944844, guid: 902cded6cbfc8594f912db6c1b8a8152, type: 3}
+      propertyPath: sceneName
+      value: Level
+      objectReference: {fileID: 0}
     - target: {fileID: 5532100742169662328, guid: 902cded6cbfc8594f912db6c1b8a8152, type: 3}
       propertyPath: m_Name
       value: LevelManager
@@ -1604,3 +1639,4 @@ SceneRoots:
   - {fileID: 1713812896876542731}
   - {fileID: 562830720}
   - {fileID: 2984691880150149729}
+  - {fileID: 1122784187}

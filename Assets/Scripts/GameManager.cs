@@ -25,11 +25,7 @@ public class GameManager : MonoBehaviour
         }
 
     }
-    void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.position = new Vector3(0, 0, 0);
-    }
+
 
     public void AddCurrency(int gained)
     {
@@ -39,6 +35,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+
     }
 }
