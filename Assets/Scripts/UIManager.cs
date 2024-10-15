@@ -70,6 +70,8 @@ public class UIManager : MonoBehaviour
         if(character.GetComponent<HealthSystem>().health <= 0)
         {
             gameState = GameState.Upgrade;
+            character.GetComponent<HealthSystem>().health = levelManager.starterHealth + gameManager.health;
+
         }
     }
 

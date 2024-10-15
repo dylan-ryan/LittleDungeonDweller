@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
     private HealthSystem healthSystem;
     public int health = 0;
 
+    public int damagePrice;
+    public int rangePrice;
+    public int speedPrice;
+    public int healthPrice;
+
     void Awake()
     {
         //If GameManager doesnt exist set this as the manager and dont destruction on load
@@ -45,21 +50,41 @@ public class GameManager : MonoBehaviour
 
     public void ButtonDamage()
     {
-        characterControllerScript.attackDamage += 1;
+        if(currency >= damagePrice)
+        {
+            characterControllerScript.attackDamage += 1;
+            currency -= damagePrice;
+            damagePrice += 1;
+        }
     }
 
     public void ButtonRange()
     {
-        characterControllerScript.swordRadius += 1f;
+        if (currency >= rangePrice)
+        {
+            characterControllerScript.swordRadius += 1f;
+            currency -= rangePrice;
+            rangePrice += 1; 
+        }
     }
 
     public void ButtonSpeed()
     {
-        characterControllerScript.moveSpeed += 1;
+        if (currency >= speedPrice)
+        {
+            characterControllerScript.moveSpeed += 1;
+            currency -= speedPrice;
+            speedPrice += 1;
+        }
     }
 
     public void ButtonHealth()
     {
-        health += 1;
+        if (currency >= healthPrice)
+        {
+            health += 1;
+            currency -= healthPrice;
+            healthPrice += 1;
+        }
     }
 }
