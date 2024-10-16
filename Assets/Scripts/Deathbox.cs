@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class Deathbox : MonoBehaviour
 {
+    private GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other == gameObject.CompareTag("Player"))
+        if(other == player)
         {
-            HealthSystem playerHealth = other.GetComponent<HealthSystem>();
+            HealthSystem playerHealth = player.GetComponent<HealthSystem>();
             playerHealth.TakeDamage(playerHealth.health);
         }
     }
