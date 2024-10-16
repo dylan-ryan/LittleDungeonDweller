@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class CharacterControllerScript : MonoBehaviour
 {
     private CharacterController characterController;
+    [HideInInspector] public Renderer objRenderer;
 
     [Header("Player Movement")]
     [SerializeField] public float moveSpeed = 10f;
@@ -45,6 +46,7 @@ public class CharacterControllerScript : MonoBehaviour
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
+        objRenderer = gameObject.GetComponent<Renderer>();
     }
 
     private void FixedUpdate()

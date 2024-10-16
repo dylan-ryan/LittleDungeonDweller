@@ -24,6 +24,7 @@ public class EnemyController : MonoBehaviour
     private Transform player;
     private int currentPatrolIndex;
     private float attackTimer;
+    private bool firstStrike;
 
     private void Start()
     {
@@ -33,6 +34,7 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         currentState = EnemyState.Patrol;
         attackTimer = attackCooldown;
+        firstStrike = false;
     }
 
     private void Update()
@@ -99,6 +101,14 @@ public class EnemyController : MonoBehaviour
         agent.SetDestination(transform.position);
 
         attackTimer -= Time.deltaTime;
+        if(firstStrike == false)
+        {
+            HealthSystem playerHealth = player.GetComponent<HealthSystem>();
+            playerHealth.TakeDamage(attackDamage);
+            Debug.Log("Enemy attacks the player!");
+            attackTimer = attackCooldown;
+            firstStrike = true;
+        }
         if (attackTimer <= 0f)
         {
             HealthSystem playerHealth = player.GetComponent<HealthSystem>();

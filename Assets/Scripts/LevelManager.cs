@@ -41,11 +41,13 @@ public class LevelManager : MonoBehaviour
             {
                 UIManager.character.transform.position = spawn.transform.position;
                 UIManager.gameState = UIManager.GameState.MainMenu;
+                player.GetComponent<CharacterControllerScript>().objRenderer.material.color = Color.white;
             }
             else
             {
                 UIManager.character.transform.position = spawn.transform.position;
                 UIManager.gameState = UIManager.GameState.Gameplay;
+                player.GetComponent<CharacterControllerScript>().objRenderer.material.color = Color.white;
             }
         }
         player.GetComponent<HealthSystem>().health = starterHealth + gameManager.health;
