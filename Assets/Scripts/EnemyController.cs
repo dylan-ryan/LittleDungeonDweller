@@ -5,6 +5,7 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     private enum EnemyState { Patrol, Chase, Attack }
+    private Animator anim;
 
     [Header("Enemy States")]
     [SerializeField] private EnemyState currentState;
@@ -28,7 +29,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        
+        anim = GetComponent<Animator>();   
         healthSystem = gameObject.GetComponent<HealthSystem>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -43,12 +44,15 @@ public class EnemyController : MonoBehaviour
         {
             case EnemyState.Patrol:
                 Patrol();
+                anim.SetBool("Walking", true);
                 break;
             case EnemyState.Chase:
                 Chase();
+                anim.SetBool("Walking", true);
                 break;
             case EnemyState.Attack:
                 Attack();
+                anim.SetBool("Walking", false);
                 break;
         }
 
