@@ -8,6 +8,7 @@ public class CharacterControllerScript : MonoBehaviour
     private CharacterController characterController;
     [HideInInspector] public Renderer objRenderer;
     private bool controlsEnabled = true;
+    private Animator anim;
 
     [Header("Player Movement")]
     [SerializeField] public float moveSpeed = 10f;
@@ -30,6 +31,7 @@ public class CharacterControllerScript : MonoBehaviour
     public static CharacterControllerScript manager;
     void Awake()
     {
+        anim = GetComponent<Animator>();
 
         //If GameManager doesnt exist set this as the manager and dont destruction on load
         if (manager == null)
@@ -56,8 +58,10 @@ public class CharacterControllerScript : MonoBehaviour
 
         if (move != Vector3.zero)
         {
+            anim.SetBool("Walking", true);
             lastMoveDirection = move.normalized;
         }
+        else anim.SetBool("Walking", false);
 
         characterController.Move(move * (Time.fixedDeltaTime * moveSpeed));
 
