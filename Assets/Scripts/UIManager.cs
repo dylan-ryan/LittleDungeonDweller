@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.TextCore.Text;
 
 public class UIManager : MonoBehaviour
 {
@@ -17,20 +14,24 @@ public class UIManager : MonoBehaviour
     private SpriteRenderer characterArt;
 
     public LevelManager levelManager;
+    [SerializeField] private GameManager gameManager;
 
-    [SerializeField]
-    private GameManager gameManager;
-    public enum GameState {MainMenu, Upgrade, Pause, Gameplay}
+
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI speedText;
+    public TextMeshProUGUI damageText;
+    public TextMeshProUGUI rangeText;
+
+    public enum GameState { MainMenu, Upgrade, Pause, Gameplay }
     public GameState gameState;
+
     void Awake()
     {
-        //If GameManager doesnt exist set this as the manager and dont destruction on load
         if (manager == null)
         {
             DontDestroyOnLoad(gameObject);
             manager = this;
         }
-        //If GameManager already exists destroy the dupe
         else if (manager != this)
         {
             Destroy(gameObject);
@@ -67,11 +68,10 @@ public class UIManager : MonoBehaviour
             gameState = GameState.Gameplay;
         }
 
-        if(character.GetComponent<HealthSystem>().health <= 0)
+        if (character.GetComponent<HealthSystem>().health <= 0)
         {
             gameState = GameState.Upgrade;
             character.GetComponent<HealthSystem>().health = levelManager.starterHealth + gameManager.health;
-
         }
     }
 
@@ -80,7 +80,6 @@ public class UIManager : MonoBehaviour
         ManagerMainMenuUI();
         characterArt.enabled = false;
         character.GetComponent<CharacterController>().enabled = false;
-
     }
 
     public void PauseUI()
@@ -92,17 +91,60 @@ public class UIManager : MonoBehaviour
     public void GameplayUI()
     {
         ManagerGameplayUI();
-        characterArt.enabled = true;
-        character.GetComponent<CharacterController>().enabled = true;
 
+        if (character != null)
+        {
+            CharacterControllerScript characterControllerScript = character.GetComponent<CharacterControllerScript>();
+
+            if (characterControllerScript != null)
+            {
+                characterControllerScript.SetControlsEnabled(true);
+            }
+
+            characterArt.enabled = true;
+            character.GetComponent<CharacterController>().enabled = true;
+        }
     }
+
 
     public void UpgradeUI()
     {
         ManagerUpgradeUI();
-        characterArt.enabled = false;
-        character.GetComponent<CharacterController>().enabled = false;
+
+        // Check if the character exists
+        if (character != null)
+        {
+            CharacterControllerScript characterControllerScript = character.GetComponent<CharacterControllerScript>();
+
+            if (characterControllerScript != null)
+            {
+                characterControllerScript.SetControlsEnabled(false);
+
+                float upgradedHealth = levelManager.starterHealth + gameManager.health;
+                float upgradedSpeed = characterControllerScript.moveSpeed;
+                float upgradedDamage = characterControllerScript.attackDamage;
+                float upgradedRange = characterControllerScript.swordRadius;
+
+                // Update UI elements
+                if (healthText != null) healthText.text = "Health: " + upgradedHealth.ToString();
+                if (speedText != null) speedText.text = "Speed: " + upgradedSpeed.ToString();
+                if (damageText != null) damageText.text = "Damage: " + upgradedDamage.ToString();
+                if (rangeText != null) rangeText.text = "Range: " + upgradedRange.ToString();
+            }
+            else
+            {
+                Debug.LogWarning("CharacterControllerScript is missing on the Player.");
+            }
+
+            characterArt.enabled = false;
+            character.GetComponent<CharacterController>().enabled = false;
+        }
+        else
+        {
+            Debug.LogWarning("Player character is missing.");
+        }
     }
+
 
     public void ManagerUpgradeUI()
     {
@@ -114,6 +156,7 @@ public class UIManager : MonoBehaviour
         upgrade.SetActive(true);
         Time.timeScale = 0f;
     }
+
     public void ManagerMainMenuUI()
     {
         Cursor.visible = true;
@@ -146,4 +189,3 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 }
-

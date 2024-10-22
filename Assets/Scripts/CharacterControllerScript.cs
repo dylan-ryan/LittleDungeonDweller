@@ -7,6 +7,7 @@ public class CharacterControllerScript : MonoBehaviour
 {
     private CharacterController characterController;
     [HideInInspector] public Renderer objRenderer;
+    private bool controlsEnabled = true;
 
     [Header("Player Movement")]
     [SerializeField] public float moveSpeed = 10f;
@@ -73,9 +74,12 @@ public class CharacterControllerScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (controlsEnabled)
         {
-            Attack();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Attack();
+            }
         }
     }
 
@@ -110,5 +114,10 @@ public class CharacterControllerScript : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(gizmoSwipeCenter, gizmoSwipeRadius);
+    }
+
+    public void SetControlsEnabled(bool enabled)
+    {
+        controlsEnabled = enabled;
     }
 }
