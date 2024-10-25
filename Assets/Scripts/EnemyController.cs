@@ -5,6 +5,10 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     private enum EnemyState { Patrol, Chase, Attack }
+    private Animator anim;
+    Transform transform;
+    Vector2 vx;
+    SpriteRenderer spriteRenderer;
 
     [Header("Enemy States")]
     [SerializeField] private EnemyState currentState;
@@ -28,7 +32,9 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        transform = GetComponent<Transform>();
+        anim = GetComponent<Animator>();   
         healthSystem = gameObject.GetComponent<HealthSystem>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -43,12 +49,15 @@ public class EnemyController : MonoBehaviour
         {
             case EnemyState.Patrol:
                 Patrol();
+                anim.SetBool("Walking", true);
                 break;
             case EnemyState.Chase:
                 Chase();
+                anim.SetBool("Walking", true);
                 break;
             case EnemyState.Attack:
                 Attack();
+                anim.SetBool("Walking", false);
                 break;
         }
 
@@ -77,6 +86,24 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
             Instantiate(coin, enemyLocation, Quaternion.identity);
         }
+        vx = new Vector2();
+    }
+    void LateUpdate()
+    {
+        // get the current scale
+        Vector3 localScale = transform.localScale;
+
+        if (vx.x > 0) // moving right so face right
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (vx.x < 0)
+        { // moving left so face left
+            spriteRenderer.flipX = false;
+        }
+
+        // update the scale
+        transform.localScale = localScale;
     }
 
     private void Patrol()
