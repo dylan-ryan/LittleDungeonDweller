@@ -16,13 +16,15 @@ public class UIManager : MonoBehaviour
     public LevelManager levelManager;
     [SerializeField] private GameManager gameManager;
 
-
+    [Header("Gameplay Stats")]
+    public TextMeshProUGUI currencyText;
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI damageText;
     public TextMeshProUGUI rangeText;
 
     public enum GameState { MainMenu, Upgrade, Pause, Gameplay }
+    [Header("GameStates")]
     public GameState gameState;
 
     void Awake()
@@ -120,12 +122,14 @@ public class UIManager : MonoBehaviour
             {
                 characterControllerScript.SetControlsEnabled(false);
 
+                float upgradeCurrency = gameManager.currency;
                 float upgradedHealth = levelManager.starterHealth + gameManager.health;
                 float upgradedSpeed = characterControllerScript.moveSpeed;
                 float upgradedDamage = characterControllerScript.attackDamage;
                 float upgradedRange = characterControllerScript.swordRadius;
 
                 // Update UI elements
+                if (currencyText != null) currencyText.text = "Currency: " + upgradeCurrency.ToString();
                 if (healthText != null) healthText.text = "Health: " + upgradedHealth.ToString();
                 if (speedText != null) speedText.text = "Speed: " + upgradedSpeed.ToString();
                 if (damageText != null) damageText.text = "Damage: " + upgradedDamage.ToString();
