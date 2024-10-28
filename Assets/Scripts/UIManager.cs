@@ -22,6 +22,10 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI damageText;
     public TextMeshProUGUI rangeText;
+    public TextMeshProUGUI healthPriceText;
+    public TextMeshProUGUI speedPriceText;
+    public TextMeshProUGUI damagePriceText;
+    public TextMeshProUGUI rangePriceText;
 
     public enum GameState { MainMenu, Upgrade, Pause, Gameplay }
     [Header("GameStates")]
@@ -123,6 +127,7 @@ public class UIManager : MonoBehaviour
                 characterControllerScript.SetControlsEnabled(false);
 
                 float upgradeCurrency = gameManager.currency;
+
                 float upgradedHealth = levelManager.starterHealth + gameManager.health;
                 float upgradedSpeed = characterControllerScript.moveSpeed;
                 float upgradedDamage = characterControllerScript.attackDamage;
@@ -134,6 +139,10 @@ public class UIManager : MonoBehaviour
                 if (speedText != null) speedText.text = "Speed: " + upgradedSpeed.ToString();
                 if (damageText != null) damageText.text = "Damage: " + upgradedDamage.ToString();
                 if (rangeText != null) rangeText.text = "Range: " + upgradedRange.ToString();
+                if (healthPriceText != null) healthPriceText.text = "Price: " + gameManager.healthPrice.ToString();
+                if (speedPriceText != null) speedPriceText.text = "Price: " + gameManager.speedPrice.ToString();
+                if (damagePriceText != null) damagePriceText.text = "Price: " + gameManager.damagePrice.ToString();
+                if (rangePriceText != null) rangePriceText.text = "Price: " + gameManager.rangePrice.ToString();
             }
             else
             {
