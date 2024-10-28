@@ -90,11 +90,11 @@ public class EnemyController : MonoBehaviour
     {
         if (vx.x > 0) // Moving right, face right
         {
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = false;
         }
         else if (vx.x < 0) // Moving left, face left
         {
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = true;
         }
     }
 
