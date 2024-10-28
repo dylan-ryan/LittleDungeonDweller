@@ -9,6 +9,7 @@ public class CharacterControllerScript : MonoBehaviour
     [HideInInspector] public Renderer objRenderer;
     private bool controlsEnabled = true;
     private Animator anim;
+    private SpriteRenderer spriteRenderer;
 
     [Header("Player Movement")]
     [SerializeField] public float moveSpeed = 10f;
@@ -20,7 +21,7 @@ public class CharacterControllerScript : MonoBehaviour
 
     [Header("Unity Layer Enemies Are On")]
     [SerializeField] private LayerMask enemyLayer;
-    
+
     private float gravity = -10f;
     private float groundCheckDistance = 0.1f;
     private Vector3 velocity;
@@ -29,17 +30,19 @@ public class CharacterControllerScript : MonoBehaviour
     private float gizmoSwipeRadius;
 
     public static CharacterControllerScript manager;
+
     void Awake()
     {
         anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
-        //If GameManager doesnt exist set this as the manager and dont destruction on load
+        // If GameManager doesn't exist, set this as the manager and don't destroy on load
         if (manager == null)
         {
             DontDestroyOnLoad(gameObject);
             manager = this;
         }
-        //If GameManager already exists destroy the dupe
+        // If GameManager already exists, destroy the duplicate
         else if (manager != this)
         {
             Destroy(gameObject);
@@ -60,8 +63,16 @@ public class CharacterControllerScript : MonoBehaviour
         {
             anim.SetBool("Walking", true);
             lastMoveDirection = move.normalized;
+
+            if (move.x > 0)
+                spriteRenderer.flipX = true;
+            else if (move.x < 0)
+                spriteRenderer.flipX = false;
         }
-        else anim.SetBool("Walking", false);
+        else
+        {
+            anim.SetBool("Walking", false);
+        }
 
         characterController.Move(move * (Time.fixedDeltaTime * moveSpeed));
 
