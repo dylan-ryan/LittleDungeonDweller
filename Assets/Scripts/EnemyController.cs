@@ -6,9 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     private enum EnemyState { Patrol, Chase, Attack }
     private Animator anim;
-    Transform transform;
-    Vector2 vx;
-    SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
 
     [Header("Enemy States")]
     [SerializeField] private EnemyState currentState;
@@ -29,12 +27,12 @@ public class EnemyController : MonoBehaviour
     private int currentPatrolIndex;
     private float attackTimer;
     private bool firstStrike;
+    private Vector2 vx;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        transform = GetComponent<Transform>();
-        anim = GetComponent<Animator>();   
+        anim = GetComponent<Animator>();
         healthSystem = gameObject.GetComponent<HealthSystem>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -86,24 +84,18 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
             Instantiate(coin, enemyLocation, Quaternion.identity);
         }
-        vx = new Vector2();
     }
+
     void LateUpdate()
     {
-        // get the current scale
-        Vector3 localScale = transform.localScale;
-
-        if (vx.x > 0) // moving right so face right
+        if (vx.x > 0) // Moving right, face right
         {
             spriteRenderer.flipX = true;
         }
-        else if (vx.x < 0)
-        { // moving left so face left
+        else if (vx.x < 0) // Moving left, face left
+        {
             spriteRenderer.flipX = false;
         }
-
-        // update the scale
-        transform.localScale = localScale;
     }
 
     private void Patrol()
@@ -116,11 +108,15 @@ public class EnemyController : MonoBehaviour
             currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
             agent.SetDestination(patrolPoints[currentPatrolIndex].position);
         }
+
+        vx = agent.velocity.normalized;
     }
 
     private void Chase()
     {
         agent.SetDestination(player.position);
+
+        vx = agent.velocity.normalized;
     }
 
     private void Attack()
@@ -128,7 +124,7 @@ public class EnemyController : MonoBehaviour
         agent.SetDestination(transform.position);
 
         attackTimer -= Time.deltaTime;
-        if(firstStrike == false)
+        if (firstStrike == false)
         {
             HealthSystem playerHealth = player.GetComponent<HealthSystem>();
             playerHealth.TakeDamage(attackDamage);
