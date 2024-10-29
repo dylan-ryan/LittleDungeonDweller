@@ -7,7 +7,7 @@ public class CharacterControllerScript : MonoBehaviour
 {
     private CharacterController characterController;
     [HideInInspector] public Renderer objRenderer;
-    private bool controlsEnabled = true;
+    public bool controlsEnabled;
     private Animator anim;
     private SpriteRenderer spriteRenderer;
 
@@ -57,45 +57,51 @@ public class CharacterControllerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
-        if (move != Vector3.zero)
+        if (controlsEnabled)
         {
-            anim.SetBool("Walking", true);
-            lastMoveDirection = move.normalized;
+            Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-            if (move.x > 0)
-                spriteRenderer.flipX = true;
-            else if (move.x < 0)
-                spriteRenderer.flipX = false;
-        }
-        else
-        {
-            anim.SetBool("Walking", false);
-        }
+            if (move != Vector3.zero)
+            {
+                anim.SetBool("Walking", true);
+                lastMoveDirection = move.normalized;
 
-        characterController.Move(move * (Time.fixedDeltaTime * moveSpeed));
+                if (move.x > 0)
+                    spriteRenderer.flipX = true;
+                else if (move.x < 0)
+                    spriteRenderer.flipX = false;
+            }
+            else
+            {
+                anim.SetBool("Walking", false);
+            }
 
-        if (characterController.isGrounded)
-        {
-            velocity.y = -groundCheckDistance;
+            characterController.Move(move * (Time.fixedDeltaTime * moveSpeed));
+
+            if (characterController.isGrounded)
+            {
+                velocity.y = -groundCheckDistance;
+            }
+            else
+            {
+                velocity.y += gravity * Time.fixedDeltaTime;
+            }
+            characterController.Move(velocity * Time.fixedDeltaTime);
         }
-        else
-        {
-            velocity.y += gravity * Time.fixedDeltaTime;
-        }
-        characterController.Move(velocity * Time.fixedDeltaTime);
+        else Debug.Log("Movement Disabled");
     }
 
     private void Update()
     {
         if (controlsEnabled)
         {
+            Debug.Log("Controls Enabled");
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Attack();
             }
         }
+        else Debug.Log("Controls Disabled");
     }
 
     public void Attack()
