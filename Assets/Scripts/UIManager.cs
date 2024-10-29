@@ -54,14 +54,14 @@ public class UIManager : MonoBehaviour
             case GameState.MainMenu:
                 MainMenuUI();
                 break;
-            case GameState.Upgrade:
-                UpgradeUI();
-                break;
             case GameState.Pause:
                 PauseUI();
                 break;
             case GameState.Gameplay:
                 GameplayUI();
+                break;
+            case GameState.Upgrade:
+                UpgradeUI();
                 break;
         }
 
@@ -101,12 +101,7 @@ public class UIManager : MonoBehaviour
         if (character != null)
         {
             CharacterControllerScript characterControllerScript = character.GetComponent<CharacterControllerScript>();
-
-            if (characterControllerScript != null)
-            {
-                characterControllerScript.SetControlsEnabled(true);
-            }
-
+            characterControllerScript.controlsEnabled = true;
             characterArt.enabled = true;
             character.GetComponent<CharacterController>().enabled = true;
         }
@@ -121,10 +116,10 @@ public class UIManager : MonoBehaviour
         if (character != null)
         {
             CharacterControllerScript characterControllerScript = character.GetComponent<CharacterControllerScript>();
+            characterControllerScript.controlsEnabled = false;
 
             if (characterControllerScript != null)
             {
-                characterControllerScript.SetControlsEnabled(false);
 
                 float upgradeCurrency = gameManager.currency;
 
@@ -166,7 +161,7 @@ public class UIManager : MonoBehaviour
         pause.SetActive(false);
         mainMenu.SetActive(false);
         gameplay.SetActive(false);
-        upgrade.SetActive(true);
+        upgrade.SetActive(true); //true
         Time.timeScale = 0f;
     }
 
@@ -174,7 +169,7 @@ public class UIManager : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        mainMenu.SetActive(true);
+        mainMenu.SetActive(true); //true
         upgrade.SetActive(false);
         pause.SetActive(false);
         gameplay.SetActive(false);
@@ -186,7 +181,7 @@ public class UIManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         mainMenu.SetActive(false);
         upgrade.SetActive(false);
-        pause.SetActive(true);
+        pause.SetActive(true); //true
         gameplay.SetActive(false);
         Time.timeScale = 0f;
     }
@@ -197,7 +192,7 @@ public class UIManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         mainMenu.SetActive(false);
         pause.SetActive(false);
-        gameplay.SetActive(true);
+        gameplay.SetActive(true); //true
         upgrade.SetActive(false);
         Time.timeScale = 1f;
     }
