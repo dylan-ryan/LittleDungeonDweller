@@ -1463,8 +1463,19 @@ MonoBehaviour:
   mainMenu: {fileID: 2198328585969820844}
   pause: {fileID: 7081419612993559016}
   gameplay: {fileID: 5093095138815176272}
+  upgrade: {fileID: 0}
   character: {fileID: 0}
   levelManager: {fileID: 0}
+  gameManager: {fileID: 0}
+  currencyText: {fileID: 0}
+  healthText: {fileID: 0}
+  speedText: {fileID: 0}
+  damageText: {fileID: 0}
+  rangeText: {fileID: 0}
+  healthPriceText: {fileID: 0}
+  speedPriceText: {fileID: 0}
+  damagePriceText: {fileID: 0}
+  rangePriceText: {fileID: 0}
   gameState: 0
 --- !u!1 &5093095138815176272
 GameObject:
