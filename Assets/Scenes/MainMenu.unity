@@ -653,14 +653,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1104365922}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: ButtonResume
-        m_Mode: 1
+        m_MethodName: ButtonLoad
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &144070713
@@ -1695,8 +1695,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1104365922}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: ButtonResume
-        m_Mode: 1
+        m_MethodName: ButtonOptions
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1827,8 +1827,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1104365922}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: ButtonLoad
-        m_Mode: 5
+        m_MethodName: ButtonQuit
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3879,7 +3879,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1104365922}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: ButtonLoad
+        m_MethodName: ButtonOptions
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
