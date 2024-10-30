@@ -653,14 +653,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1104365922}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: ButtonResume
-        m_Mode: 1
+        m_MethodName: ButtonLoad
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &144070713
@@ -1679,8 +1679,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: f5703cd240d67f2458ac93ba94af8647, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 2025c8162b8c5784b947cb8334548ee3, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 25d4cc0770ccf9a4783e2f1db8dd7f9e, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 1ea9ee5bcd7a3cb46a8fd0a1ae9ffbb8, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: f5703cd240d67f2458ac93ba94af8647, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -1695,8 +1695,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1104365922}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: ButtonResume
-        m_Mode: 1
+        m_MethodName: ButtonOptions
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1827,8 +1827,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1104365922}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: ButtonLoad
-        m_Mode: 5
+        m_MethodName: ButtonQuit
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3879,7 +3879,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1104365922}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: ButtonLoad
+        m_MethodName: ButtonOptions
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4751,7 +4751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7081419612993559016, guid: ac92793709d13974aa178c128c5ed4b6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7261136751984497949, guid: ac92793709d13974aa178c128c5ed4b6, type: 3}
       propertyPath: m_LocalScale.x
