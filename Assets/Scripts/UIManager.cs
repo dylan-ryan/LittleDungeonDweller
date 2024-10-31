@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
@@ -97,11 +98,11 @@ public class UIManager : MonoBehaviour
     public void GameplayUI()
     {
         ManagerGameplayUI();
+        CharacterControllerScript characterControllerScript = character.GetComponent<CharacterControllerScript>();
+        characterControllerScript.controlsEnabled = true;
 
         if (character != null)
         {
-            CharacterControllerScript characterControllerScript = character.GetComponent<CharacterControllerScript>();
-            characterControllerScript.controlsEnabled = true;
             characterArt.enabled = true;
             character.GetComponent<CharacterController>().enabled = true;
         }
@@ -111,13 +112,13 @@ public class UIManager : MonoBehaviour
     public void UpgradeUI()
     {
         ManagerUpgradeUI();
+        CharacterControllerScript characterControllerScript = character.GetComponent<CharacterControllerScript>();
+        characterControllerScript.SetControlsEnabled(false);
+        EventSystem.current.SetSelectedGameObject(null);
 
         // Check if the character exists
         if (character != null)
         {
-            CharacterControllerScript characterControllerScript = character.GetComponent<CharacterControllerScript>();
-            characterControllerScript.controlsEnabled = false;
-
             if (characterControllerScript != null)
             {
 
