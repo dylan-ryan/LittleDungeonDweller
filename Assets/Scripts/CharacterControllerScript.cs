@@ -20,6 +20,8 @@ public class CharacterControllerScript : MonoBehaviour
     [SerializeField] public float swordRange = 2f;
     public int attackDamage = 1;
     [SerializeField] private float attackCooldown = 2f;
+    [SerializeField] private Sprite attackSprite;
+    [SerializeField] private Sprite defaultSprite; 
 
     [Header("Unity Layer Enemies Are On")]
     [SerializeField] private LayerMask enemyLayer;
@@ -112,6 +114,12 @@ public class CharacterControllerScript : MonoBehaviour
 
     public void Attack()
     {
+        anim.enabled = false;
+
+        spriteRenderer.sprite = attackSprite;
+
+        Invoke("ResetSprite", 0.5f);
+
         Vector3 swipeCenter = transform.position + lastMoveDirection * swordRange;
         gizmoSwipeCenter = swipeCenter;
         gizmoSwipeRadius = swordRadius;
@@ -134,6 +142,12 @@ public class CharacterControllerScript : MonoBehaviour
         {
             Debug.Log("Missed");
         }
+    }
+
+    private void ResetSprite()
+    {
+        spriteRenderer.sprite = defaultSprite;
+        anim.enabled = true;
     }
 
     private void OnDrawGizmos()

@@ -180,13 +180,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da4103f91ef2b54591c9059a2c5309a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objRenderer: {fileID: 0}
+  controlsEnabled: 0
   moveSpeed: 10
   swordRadius: 1.5
   swordRange: 2
   attackDamage: 1
+  attackCooldown: 2
+  attackSprite: {fileID: 21300000, guid: 0d772b6a2caf2364cb3cdedf67e40a0a, type: 3}
+  defaultSprite: {fileID: -148439865, guid: 235f7fd14e9f1c8489cd642ee1b532e2, type: 3}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
+  cooldownImage: {fileID: 0}
 --- !u!114 &2514618203076921186
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab79f3c9ab1ad184385a9ee1dfc2f506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultSprite: {fileID: -1535185901, guid: 4ece9157cf4278440a4b5113b837d926, type: 3}
+  attackSprite: {fileID: 21300000, guid: 692773b09677beb43ad4891b4f567364, type: 3}
   currentState: 0
   patrolPoints:
   - {fileID: 0}

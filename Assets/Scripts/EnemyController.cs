@@ -1,4 +1,4 @@
-using UnityEditor;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +7,10 @@ public class EnemyController : MonoBehaviour
     private enum EnemyState { Patrol, Chase, Attack }
     private Animator anim;
     private SpriteRenderer spriteRenderer;
+
+    [Header("Enemy Sprites")]
+    public Sprite defaultSprite;
+    public Sprite attackSprite;
 
     [Header("Enemy States")]
     [SerializeField] private EnemyState currentState;
@@ -88,11 +92,11 @@ public class EnemyController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (vx.x > 0) // Moving right, face right
+        if (vx.x > 0)
         {
             spriteRenderer.flipX = false;
         }
-        else if (vx.x < 0) // Moving left, face left
+        else if (vx.x < 0)
         {
             spriteRenderer.flipX = true;
         }
@@ -126,6 +130,7 @@ public class EnemyController : MonoBehaviour
         attackTimer -= Time.deltaTime;
         if (firstStrike == false)
         {
+            StartCoroutine(PlayAttackSprite());
             HealthSystem playerHealth = player.GetComponent<HealthSystem>();
             playerHealth.TakeDamage(attackDamage);
             Debug.Log("Enemy attacks the player!");
@@ -134,10 +139,24 @@ public class EnemyController : MonoBehaviour
         }
         if (attackTimer <= 0f)
         {
+            StartCoroutine(PlayAttackSprite());
             HealthSystem playerHealth = player.GetComponent<HealthSystem>();
             playerHealth.TakeDamage(attackDamage);
             Debug.Log("Enemy attacks the player!");
             attackTimer = attackCooldown;
         }
     }
+
+    private IEnumerator PlayAttackSprite()
+    {
+        anim.enabled = false;
+
+        spriteRenderer.sprite = attackSprite;
+
+        yield return new WaitForSeconds(0.5f);
+
+        spriteRenderer.sprite = defaultSprite;
+        anim.enabled = true;
+    }
+
 }
