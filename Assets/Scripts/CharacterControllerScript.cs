@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CharacterControllerScript : MonoBehaviour
 {
@@ -18,9 +19,13 @@ public class CharacterControllerScript : MonoBehaviour
     [SerializeField] public float swordRadius = 1.5f;
     [SerializeField] public float swordRange = 2f;
     public int attackDamage = 1;
+    [SerializeField] private float attackCooldown = 2f;
 
     [Header("Unity Layer Enemies Are On")]
     [SerializeField] private LayerMask enemyLayer;
+
+    [Header("UI Cooldown Indicator")]
+    [SerializeField] private Image cooldownImage;
 
     private float gravity = -10f;
     private float groundCheckDistance = 0.1f;
@@ -28,6 +33,7 @@ public class CharacterControllerScript : MonoBehaviour
     private Vector3 lastMoveDirection;
     private Vector3 gizmoSwipeCenter;
     private float gizmoSwipeRadius;
+    private float cooldownTimer = 0f;
 
     public static CharacterControllerScript manager;
 
@@ -36,13 +42,11 @@ public class CharacterControllerScript : MonoBehaviour
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // If GameManager doesn't exist, set this as the manager and don't destroy on load
         if (manager == null)
         {
             DontDestroyOnLoad(gameObject);
             manager = this;
         }
-        // If GameManager already exists, destroy the duplicate
         else if (manager != this)
         {
             Destroy(gameObject);
@@ -88,26 +92,27 @@ public class CharacterControllerScript : MonoBehaviour
             }
             characterController.Move(velocity * Time.fixedDeltaTime);
         }
-        else Debug.Log("Movement Disabled");
     }
 
     private void Update()
     {
         if (controlsEnabled)
         {
-            Debug.Log("Controls Enabled");
-            if (Input.GetKeyDown(KeyCode.Space))
+            cooldownTimer -= Time.deltaTime;
+
+            cooldownImage.fillAmount = cooldownTimer / attackCooldown;
+
+            if (Input.GetKeyDown(KeyCode.Space) && cooldownTimer <= 0)
             {
                 Attack();
+                cooldownTimer = attackCooldown;
             }
         }
-        else Debug.Log("Controls Disabled");
     }
 
     public void Attack()
     {
         Vector3 swipeCenter = transform.position + lastMoveDirection * swordRange;
-
         gizmoSwipeCenter = swipeCenter;
         gizmoSwipeRadius = swordRadius;
 
