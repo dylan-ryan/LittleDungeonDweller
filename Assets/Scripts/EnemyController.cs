@@ -14,7 +14,6 @@ public class EnemyController : MonoBehaviour
 
     [Header("Enemy States")]
     [SerializeField] private EnemyState currentState;
-    [SerializeField] private Transform[] patrolPoints;
     [SerializeField] private float chaseRange = 10f;
 
     [Header("Enemy Attack Values")]
@@ -28,7 +27,6 @@ public class EnemyController : MonoBehaviour
     private HealthSystem healthSystem;
     private NavMeshAgent agent;
     private Transform player;
-    private int currentPatrolIndex;
     private float attackTimer;
     private bool firstStrike;
     private Vector2 vx;
@@ -50,8 +48,8 @@ public class EnemyController : MonoBehaviour
         switch (currentState)
         {
             case EnemyState.Patrol:
-                Patrol();
-                anim.SetBool("Walking", true);
+                Idle();
+                anim.SetBool("Walking", false);
                 break;
             case EnemyState.Chase:
                 Chase();
@@ -102,24 +100,16 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void Patrol()
+    private void Idle()
     {
-        if (patrolPoints.Length == 0)
-            return;
-
-        if (agent.remainingDistance < 0.5f)
-        {
-            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
-            agent.SetDestination(patrolPoints[currentPatrolIndex].position);
-        }
-
-        vx = agent.velocity.normalized;
+        // Enemy does nothing while idling in Patrol state
+        vx = Vector2.zero;
+        agent.SetDestination(transform.position); // Keeps the agent in place
     }
 
     private void Chase()
     {
         agent.SetDestination(player.position);
-
         vx = agent.velocity.normalized;
     }
 
@@ -158,5 +148,4 @@ public class EnemyController : MonoBehaviour
         spriteRenderer.sprite = defaultSprite;
         anim.enabled = true;
     }
-
 }
