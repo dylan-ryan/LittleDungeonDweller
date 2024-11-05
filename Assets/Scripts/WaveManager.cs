@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System.Collections.Generic;  // For managing the list of active enemies
 
 public class WaveManager : MonoBehaviour
 {
@@ -22,9 +23,10 @@ public class WaveManager : MonoBehaviour
     private const int maxSpawnAttempts = 5;
 
     // Timing variables for the wave system
-    private float startTime;
-    private float spawnInterval = 5f; // Time between each wave
     private int waveCount = 1;         // Current wave count
+
+    // List to track all active enemies
+    private List<GameObject> activeEnemies = new List<GameObject>();
 
     private void Awake()
     {
@@ -35,20 +37,24 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
-        // Record the starting time and begin spawning waves
-        startTime = Time.time;
+        // Start spawning waves after all previous enemies are dead
         StartCoroutine(SpawnWaves());
     }
 
     // Coroutine to manage spawning waves of enemies
     IEnumerator SpawnWaves()
     {
-        // Continue spawning waves until 5 minutes have passed
-        while (Time.time - startTime <= 300f) // 300 seconds long
+        // Continue spawning waves as long as the game is running
+        while (true)
         {
-            SpawnWave();    // Spawn a wave of enemies
-            waveCount++;    // Increment the wave count
-            yield return new WaitForSeconds(spawnInterval); // Wait for the specified spawn interval
+            // Spawn the next wave
+            SpawnWave();
+
+            // Wait until all enemies in the current wave are killed
+            yield return new WaitUntil(() => activeEnemies.Count == 0);
+
+            // Move to the next wave
+            waveCount++;
         }
     }
 
@@ -75,7 +81,10 @@ public class WaveManager : MonoBehaviour
             // Try to find a valid spawn position for the enemy
             if (TryGetNavMeshSpawnPosition(out spawnPosition))
             {
-                Instantiate(enemyPrefab, spawnPosition, Quaternion.identity); // Spawn the enemy at the valid position
+                GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity); // Spawn the enemy at the valid position
+                activeEnemies.Add(enemy); // Add the enemy to the active list for tracking
+                // Optionally, you can subscribe to an event that gets called when the enemy dies.
+                // For example, you can implement an enemy death handler where you remove enemies from the list upon death.
             }
             else
             {
@@ -110,5 +119,12 @@ public class WaveManager : MonoBehaviour
         // Calculate the offset position based on angle and distance
         Vector3 offset = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * distance;
         return playerTransform.position + offset; // Return the final spawn position
+    }
+
+    // Call this method when an enemy dies
+    public void OnEnemyDeath(GameObject enemy)
+    {
+        // Remove the enemy from the active list
+        activeEnemies.Remove(enemy);
     }
 }

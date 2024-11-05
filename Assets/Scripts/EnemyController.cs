@@ -82,6 +82,8 @@ public class EnemyController : MonoBehaviour
 
         if (healthSystem.health <= 0)
         {
+            WaveManager waveManager = FindObjectOfType<WaveManager>();
+            waveManager.OnEnemyDeath(this.gameObject);
             Vector3 enemyLocation = transform.position;
             Destroy(gameObject);
             Instantiate(coin, enemyLocation, Quaternion.identity);
