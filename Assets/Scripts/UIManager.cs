@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     public GameObject pause;
     public GameObject gameplay;
     public GameObject upgrade;
+    public GameObject options;
+    public GameObject results;
 
     [HideInInspector] public GameObject character;
     private SpriteRenderer characterArt;
@@ -28,7 +30,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI damagePriceText;
     public TextMeshProUGUI rangePriceText;
 
-    public enum GameState { MainMenu, Upgrade, Pause, Gameplay }
+    public enum GameState { MainMenu, Upgrade, Pause, Gameplay, Options, Results }
     [Header("GameStates")]
     public GameState gameState;
 
@@ -64,6 +66,12 @@ public class UIManager : MonoBehaviour
             case GameState.Upgrade:
                 UpgradeUI();
                 break;
+            case GameState.Options:
+                OptionsUI();
+                break;
+            case GameState.Results:
+                ResultsUI();
+                break;
         }
 
         if (Input.GetKeyUp(KeyCode.Escape) && gameState == GameState.Gameplay)
@@ -80,6 +88,16 @@ public class UIManager : MonoBehaviour
             gameState = GameState.Upgrade;
             character.GetComponent<HealthSystem>().health = levelManager.starterHealth + gameManager.health;
         }
+    }
+
+    public void OptionsUI()
+    {
+
+    }
+
+    public void ResultsUI()
+    {
+
     }
 
     public void MainMenuUI()
@@ -154,6 +172,15 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ManagerOptionsUI()
+    {
+
+    }
+
+    public void ManagerResultsUI()
+    {
+
+    }
 
     public void ManagerUpgradeUI()
     {
