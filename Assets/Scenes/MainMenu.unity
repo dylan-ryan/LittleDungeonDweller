@@ -4189,7 +4189,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 1, y: 54}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1615030169
 MonoBehaviour:
@@ -4211,7 +4211,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 133e6fd17b8e3424c9a1b7bb832d3035, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4641ce8829677f9429538a4fd83edaa5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5503,6 +5503,9 @@ PrefabInstance:
       addedObject: {fileID: 869543964}
     - targetCorrespondingSourceObject: {fileID: 1001729450978875990, guid: ac92793709d13974aa178c128c5ed4b6, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1615030168}
+    - targetCorrespondingSourceObject: {fileID: 1001729450978875990, guid: ac92793709d13974aa178c128c5ed4b6, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 617770541}
     - targetCorrespondingSourceObject: {fileID: 1001729450978875990, guid: ac92793709d13974aa178c128c5ed4b6, type: 3}
       insertIndex: -1
@@ -5516,9 +5519,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1001729450978875990, guid: ac92793709d13974aa178c128c5ed4b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1567445381}
-    - targetCorrespondingSourceObject: {fileID: 1001729450978875990, guid: ac92793709d13974aa178c128c5ed4b6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1615030168}
     - targetCorrespondingSourceObject: {fileID: 4789567952442864287, guid: ac92793709d13974aa178c128c5ed4b6, type: 3}
       insertIndex: 1
       addedObject: {fileID: 1904260805}
