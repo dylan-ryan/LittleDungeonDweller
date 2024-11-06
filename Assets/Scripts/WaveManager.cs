@@ -84,6 +84,9 @@ public class WaveManager : MonoBehaviour
     // Method to spawn a wave of enemies
     void SpawnWave()
     {
+        // Clear any remaining enemies from previous waves
+        activeEnemies.Clear();
+
         // Determine how many of each enemy to spawn based on the wave count
         int wolfCount = Mathf.Min(waveCount, 5);           // Max 5 wolves
         int goblinCount = Mathf.Max(0, waveCount - 5);     // Goblins increase after wave 5
@@ -97,6 +100,7 @@ public class WaveManager : MonoBehaviour
         SpawnEnemies(goblinPrefab, goblinCount);
         SpawnEnemies(ogrePrefab, ogreCount);
     }
+
 
     // Method to spawn a specified number of a given enemy prefab
     void SpawnEnemies(GameObject enemyPrefab, int count)
@@ -159,6 +163,8 @@ public class WaveManager : MonoBehaviour
         // Find the nearest enemy
         GameObject nearestEnemy = null;
         float closestDistance = Mathf.Infinity;
+
+        activeEnemies.RemoveAll(enemy => enemy == null);
 
         foreach (GameObject enemy in activeEnemies)
         {

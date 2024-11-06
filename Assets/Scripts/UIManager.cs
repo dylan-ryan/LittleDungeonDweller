@@ -12,6 +12,10 @@ public class UIManager : MonoBehaviour
     public GameObject upgrade;
     public GameObject options;
     public GameObject results;
+    public GameObject introPanel;
+
+    private bool hasShownIntro = false;
+
 
     [HideInInspector] public GameObject character;
     private SpriteRenderer characterArt;
@@ -50,7 +54,7 @@ public class UIManager : MonoBehaviour
     public void Update()
     {
         character = GameObject.FindGameObjectWithTag("Player");
-        characterArt = GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>();
+        characterArt = character.GetComponent<SpriteRenderer>();
 
         switch (gameState)
         {
@@ -85,19 +89,21 @@ public class UIManager : MonoBehaviour
 
         if (character.GetComponent<HealthSystem>().health <= 0)
         {
-            gameState = GameState.Upgrade;
+            gameState = GameState.Results;
             character.GetComponent<HealthSystem>().health = levelManager.starterHealth + gameManager.health;
         }
     }
 
     public void OptionsUI()
     {
-
+        ManagerOptionsUI();
     }
 
     public void ResultsUI()
     {
-
+        ManagerResultsUI();
+        characterArt.enabled = false;
+        character.GetComponent<CharacterController>().enabled = false;
     }
 
     public void MainMenuUI()
@@ -124,8 +130,23 @@ public class UIManager : MonoBehaviour
             characterArt.enabled = true;
             character.GetComponent<CharacterController>().enabled = true;
         }
+
+        if (!hasShownIntro && introPanel != null)
+        {
+            introPanel.SetActive(true);
+            Time.timeScale = 0f;
+        }
     }
 
+    public void CloseIntroPanel()
+    {
+        if (introPanel != null)
+        {
+            introPanel.SetActive(false);
+            hasShownIntro = true;
+            Time.timeScale = 1f;
+        }
+    }
 
     public void UpgradeUI()
     {
@@ -134,12 +155,10 @@ public class UIManager : MonoBehaviour
         characterControllerScript.SetControlsEnabled(false);
         EventSystem.current.SetSelectedGameObject(null);
 
-        // Check if the character exists
         if (character != null)
         {
             if (characterControllerScript != null)
             {
-
                 float upgradeCurrency = gameManager.currency;
 
                 float upgradedHealth = levelManager.starterHealth + gameManager.health;
@@ -147,7 +166,6 @@ public class UIManager : MonoBehaviour
                 float upgradedDamage = characterControllerScript.attackDamage;
                 float upgradedRange = characterControllerScript.swordRadius;
 
-                // Update UI elements
                 if (currencyText != null) currencyText.text = "Currency: " + upgradeCurrency.ToString();
                 if (healthText != null) healthText.text = "Health: " + upgradedHealth.ToString();
                 if (speedText != null) speedText.text = "Speed: " + upgradedSpeed.ToString();
@@ -158,46 +176,52 @@ public class UIManager : MonoBehaviour
                 if (damagePriceText != null) damagePriceText.text = "Price: " + gameManager.damagePrice.ToString();
                 if (rangePriceText != null) rangePriceText.text = "Price: " + gameManager.rangePrice.ToString();
             }
-            else
-            {
-                Debug.LogWarning("CharacterControllerScript is missing on the Player.");
-            }
 
             characterArt.enabled = false;
             character.GetComponent<CharacterController>().enabled = false;
-        }
-        else
-        {
-            Debug.LogWarning("Player character is missing.");
         }
     }
 
     public void ManagerOptionsUI()
     {
-
+        options.SetActive(true);
+        pause.SetActive(false);
+        upgrade.SetActive(false);
+        gameplay.SetActive(false);
+        mainMenu.SetActive(false);
+        results.SetActive(false);
     }
 
     public void ManagerResultsUI()
     {
-
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        mainMenu.SetActive(false);
+        upgrade.SetActive(false);
+        pause.SetActive(false);
+        gameplay.SetActive(false);
+        results.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void ManagerUpgradeUI()
     {
+        results.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         pause.SetActive(false);
         mainMenu.SetActive(false);
         gameplay.SetActive(false);
-        upgrade.SetActive(true); //true
+        upgrade.SetActive(true);
         Time.timeScale = 0f;
     }
 
     public void ManagerMainMenuUI()
     {
+        results.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        mainMenu.SetActive(true); //true
+        mainMenu.SetActive(true);
         upgrade.SetActive(false);
         pause.SetActive(false);
         gameplay.SetActive(false);
@@ -205,23 +229,75 @@ public class UIManager : MonoBehaviour
 
     public void ManagerPauseUI()
     {
+        results.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         mainMenu.SetActive(false);
         upgrade.SetActive(false);
-        pause.SetActive(true); //true
+        pause.SetActive(true);
         gameplay.SetActive(false);
         Time.timeScale = 0f;
     }
 
     public void ManagerGameplayUI()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        results.SetActive(false);
         mainMenu.SetActive(false);
         pause.SetActive(false);
-        gameplay.SetActive(true); //true
+        gameplay.SetActive(true);
         upgrade.SetActive(false);
-        Time.timeScale = 1f;
+        if(hasShownIntro == true)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1f;
+        }
+    }
+
+    public void ButtonSwitchScreen(string screenName)
+    {
+        mainMenu.SetActive(false);
+        pause.SetActive(false);
+        gameplay.SetActive(false);
+        upgrade.SetActive(false);
+        options.SetActive(false);
+        results.SetActive(false);
+
+        switch (screenName)
+        {
+            case "MainMenu":
+                mainMenu.SetActive(true);
+                gameState = GameState.MainMenu;
+                ManagerMainMenuUI();
+                break;
+            case "Pause":
+                pause.SetActive(true);
+                gameState = GameState.Pause;
+                ManagerPauseUI();
+                break;
+            case "Gameplay":
+                gameplay.SetActive(true);
+                gameState = GameState.Gameplay;
+                ManagerGameplayUI();
+                break;
+            case "Upgrade":
+                upgrade.SetActive(true);
+                gameState = GameState.Upgrade;
+                ManagerUpgradeUI();
+                break;
+            case "Options":
+                options.SetActive(true);
+                gameState = GameState.Options;
+                ManagerOptionsUI();
+                break;
+            case "Results":
+                results.SetActive(true);
+                gameState = GameState.Results;
+                ManagerResultsUI();
+                break;
+            default:
+                Debug.LogWarning("Screen name not recognized: " + screenName);
+                break;
+        }
     }
 }
