@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 using System.Collections.Generic;  // For managing the list of active enemies
+using TMPro;
+using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
@@ -14,6 +16,11 @@ public class WaveManager : MonoBehaviour
     private GameObject player;
     private Transform playerTransform;
 
+    // Reference to progress bar and wave counter
+    private Slider progressBar;
+    private TextMeshProUGUI waveCounter;
+    private RectTransform arrowUI;
+
     // Radius around the player where enemies can spawn
     public float spawnRadius = 10f;
     // Distance used to sample the NavMesh for valid spawn positions
@@ -24,6 +31,7 @@ public class WaveManager : MonoBehaviour
 
     // Timing variables for the wave system
     private int waveCount = 1;         // Current wave count
+    private int enemiesInWave;         // Total enemies in current wave
 
     // List to track all active enemies
     private List<GameObject> activeEnemies = new List<GameObject>();
@@ -33,12 +41,21 @@ public class WaveManager : MonoBehaviour
         // Find the player object in the scene and store its Transform
         player = GameObject.FindGameObjectWithTag("Player");
         playerTransform = player.transform;
+        // Find the slider and wave counter
+        progressBar = GameObject.Find("ProgressBar")?.GetComponent<Slider>();
+        waveCounter = GameObject.Find("WaveCounter")?.GetComponent<TextMeshProUGUI>();
+        arrowUI = GameObject.Find("ArrowUI")?.GetComponent<RectTransform>();
     }
 
     void Start()
     {
         // Start spawning waves after all previous enemies are dead
         StartCoroutine(SpawnWaves());
+    }
+    void Update()
+    {
+        if (activeEnemies.Count > 0)
+            PointArrowToNearestEnemy();
     }
 
     // Coroutine to manage spawning waves of enemies
@@ -50,8 +67,14 @@ public class WaveManager : MonoBehaviour
             // Spawn the next wave
             SpawnWave();
 
+            // Set up the UI for the current wave
+            waveCounter.text = "Wave: " + waveCount;
+            progressBar.maxValue = enemiesInWave;
+            progressBar.value = enemiesInWave;
+
             // Wait until all enemies in the current wave are killed
             yield return new WaitUntil(() => activeEnemies.Count == 0);
+            yield return new WaitForSeconds(5f);
 
             // Move to the next wave
             waveCount++;
@@ -65,6 +88,9 @@ public class WaveManager : MonoBehaviour
         int wolfCount = Mathf.Min(waveCount, 5);           // Max 5 wolves
         int goblinCount = Mathf.Max(0, waveCount - 5);     // Goblins increase after wave 5
         int ogreCount = Mathf.Max(0, waveCount - 10);       // Ogres increase after wave 10
+
+        // Calculate total enemies in this wave
+        enemiesInWave = wolfCount + goblinCount + ogreCount;
 
         // Spawn the enemies of each type
         SpawnEnemies(wolfPrefab, wolfCount);
@@ -83,8 +109,6 @@ public class WaveManager : MonoBehaviour
             {
                 GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity); // Spawn the enemy at the valid position
                 activeEnemies.Add(enemy); // Add the enemy to the active list for tracking
-                // Optionally, you can subscribe to an event that gets called when the enemy dies.
-                // For example, you can implement an enemy death handler where you remove enemies from the list upon death.
             }
             else
             {
@@ -126,5 +150,72 @@ public class WaveManager : MonoBehaviour
     {
         // Remove the enemy from the active list
         activeEnemies.Remove(enemy);
+        progressBar.value = activeEnemies.Count;
     }
+    private void PointArrowToNearestEnemy()
+    {
+        if (arrowUI == null || Camera.main == null) return;
+
+        // Find the nearest enemy
+        GameObject nearestEnemy = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (GameObject enemy in activeEnemies)
+        {
+            if (enemy == null) continue;
+
+            float distance = Vector3.Distance(playerTransform.position, enemy.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                nearestEnemy = enemy;
+            }
+        }
+
+        if (nearestEnemy != null)
+        {
+            // Get the screen position of the enemy relative to the camera
+            Vector3 enemyScreenPosition = Camera.main.WorldToScreenPoint(nearestEnemy.transform.position);
+
+            // Check if the enemy is on-screen
+            bool isOnScreen = enemyScreenPosition.z > 0 &&
+                              enemyScreenPosition.x > 0 && enemyScreenPosition.x < Screen.width &&
+                              enemyScreenPosition.y > 0 && enemyScreenPosition.y < Screen.height;
+
+            if (isOnScreen)
+            {
+                // Hide the arrow if the enemy is on-screen
+                arrowUI.gameObject.SetActive(false);
+            }
+            else
+            {
+                // Show the arrow and place it at the edge of the screen
+                arrowUI.gameObject.SetActive(true);
+
+                // Calculate direction to the enemy in screen space
+                Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+                Vector3 directionToEnemy = (enemyScreenPosition - screenCenter).normalized;
+
+                // Position the arrow on the edge based on direction
+                float edgeDistance = Mathf.Min(Screen.width, Screen.height) / 2 - 50; // Adjust the 50 for padding
+                Vector3 edgePosition = screenCenter + directionToEnemy * edgeDistance;
+
+                // Clamp the position to stay within screen bounds
+                edgePosition.x = Mathf.Clamp(edgePosition.x, 0, Screen.width);
+                edgePosition.y = Mathf.Clamp(edgePosition.y, 0, Screen.height);
+
+                // Set the arrow's position and rotation
+                arrowUI.position = edgePosition;
+                float angle = Mathf.Atan2(directionToEnemy.y, directionToEnemy.x) * Mathf.Rad2Deg;
+                arrowUI.rotation = Quaternion.Euler(0, 0, angle);
+            }
+        }
+        else
+        {
+            // Hide the arrow if there are no enemies
+            arrowUI.gameObject.SetActive(false);
+        }
+    }
+
+
 }
