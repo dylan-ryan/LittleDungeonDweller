@@ -9,29 +9,37 @@ public class GameManager : MonoBehaviour
     public int currency;
     public LevelManager levelManager;
 
-    //Refrences
+    // References
     private GameObject player;
     private CharacterControllerScript characterControllerScript;
     private HealthSystem healthSystem;
     public int health = 0;
 
     public int damagePrice;
-    public int rangePrice;
-    public int speedPrice;
+    public int attackSpeedPrice;
+    public int moveSpeedPrice;
     public int healthPrice;
 
     public int currencyGainedLastRun = 0;
     public int enemiesKilledLastRun = 0;
 
+    // Upgrade counters
+    public int damageUpgradeCount = 0;
+    public int attackSpeedUpgradeCount = 0;
+    public int moveSpeedUpgradeCount = 0;
+    public int healthUpgradeCount = 0;
+    public const int maxUpgrades = 5;
+
+
+
     void Awake()
     {
-        //If GameManager doesnt exist set this as the manager and dont destruction on load
+        //If GameManager doesn't exist set this as the manager and don't destroy on load
         if (manager == null)
         {
             DontDestroyOnLoad(gameObject);
             manager = this;
         }
-        //If GameManager already exists destroy the dupe
         else if (manager != this)
         {
             Destroy(gameObject);
@@ -44,7 +52,6 @@ public class GameManager : MonoBehaviour
         enemiesKilledLastRun = 0;
     }
 
-
     public void AddCurrency(int gained)
     {
         currency += gained;
@@ -52,7 +59,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("Currency added: " + gained + ", Total currency gained this run: " + currencyGainedLastRun);
     }
 
-    // Update is called once per frame
     void Update()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -62,41 +68,65 @@ public class GameManager : MonoBehaviour
 
     public void ButtonDamage()
     {
-        if(currency >= damagePrice)
+        if (currency >= damagePrice && damageUpgradeCount < maxUpgrades)
         {
             characterControllerScript.attackDamage += 1;
             currency -= damagePrice;
             damagePrice += 1;
+            damageUpgradeCount++;
+
+            if (damageUpgradeCount >= maxUpgrades)
+            {
+                Debug.Log("Max damage upgrades reached.");
+            }
         }
     }
 
-    public void ButtonRange()
+    public void ButtonAttackSpeed()
     {
-        if (currency >= rangePrice)
+        if (currency >= attackSpeedPrice && attackSpeedUpgradeCount < maxUpgrades)
         {
-            characterControllerScript.swordRadius += 1f;
-            currency -= rangePrice;
-            rangePrice += 1; 
+            characterControllerScript.attackCooldown = Mathf.Max(0.1f, characterControllerScript.attackCooldown - 0.1f);
+            currency -= attackSpeedPrice;
+            attackSpeedPrice += 1;
+            attackSpeedUpgradeCount++;
+
+            if (attackSpeedUpgradeCount >= maxUpgrades)
+            {
+                Debug.Log("Max attack speed upgrades reached.");
+            }
         }
     }
 
-    public void ButtonSpeed()
+    public void ButtonMoveSpeed()
     {
-        if (currency >= speedPrice)
+        if (currency >= moveSpeedPrice && moveSpeedUpgradeCount < maxUpgrades)
         {
             characterControllerScript.moveSpeed += 1;
-            currency -= speedPrice;
-            speedPrice += 1;
+            currency -= moveSpeedPrice;
+            moveSpeedPrice += 1;
+            moveSpeedUpgradeCount++;
+
+            if (moveSpeedUpgradeCount >= maxUpgrades)
+            {
+                Debug.Log("Max move speed upgrades reached.");
+            }
         }
     }
 
     public void ButtonHealth()
     {
-        if (currency >= healthPrice)
+        if (currency >= healthPrice && healthUpgradeCount < maxUpgrades)
         {
             health += 1;
             currency -= healthPrice;
             healthPrice += 1;
+            healthUpgradeCount++;
+
+            if (healthUpgradeCount >= maxUpgrades)
+            {
+                Debug.Log("Max health upgrades reached.");
+            }
         }
     }
 }

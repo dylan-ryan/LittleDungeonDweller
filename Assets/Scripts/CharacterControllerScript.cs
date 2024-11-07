@@ -19,7 +19,7 @@ public class CharacterControllerScript : MonoBehaviour
     [SerializeField] public float swordRadius = 1.5f;
     [SerializeField] public float swordRange = 2f;
     public int attackDamage = 1;
-    [SerializeField] private float attackCooldown = 2f;
+    public float attackCooldown = 2f;
     [SerializeField] private Sprite attackSprite;
     [SerializeField] private Sprite defaultSprite; 
 

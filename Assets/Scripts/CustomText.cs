@@ -28,6 +28,6 @@ public class CustomText : MonoBehaviour
             "Health: " + health.health + "      " +
             "Speed: " + characterStats.moveSpeed + "      " +
             "Damage: " + characterStats.attackDamage + "     " +
-            "Range: " + characterStats.swordRange);
+            "Attack Cooldown: " + characterStats.attackCooldown);
     }
 }

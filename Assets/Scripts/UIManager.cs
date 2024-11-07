@@ -189,19 +189,23 @@ public class UIManager : MonoBehaviour
                 float upgradeCurrency = gameManager.currency;
 
                 float upgradedHealth = levelManager.starterHealth + gameManager.health;
-                float upgradedSpeed = characterControllerScript.moveSpeed;
+                float upgradedMoveSpeed = characterControllerScript.moveSpeed;
                 float upgradedDamage = characterControllerScript.attackDamage;
-                float upgradedRange = characterControllerScript.swordRadius;
+                float upgradedAttackSpeed = characterControllerScript.attackCooldown;
 
-                if (currencyText != null) currencyText.text = "Currency: " + upgradeCurrency.ToString();
-                if (healthText != null) healthText.text = "Health: " + upgradedHealth.ToString();
-                if (speedText != null) speedText.text = "Speed: " + upgradedSpeed.ToString();
-                if (damageText != null) damageText.text = "Damage: " + upgradedDamage.ToString();
-                if (rangeText != null) rangeText.text = "Range: " + upgradedRange.ToString();
+                if (healthText != null)
+                    healthText.text = $"({gameManager.healthUpgradeCount}/5)";
+                if (speedText != null)
+                    speedText.text = $"({gameManager.moveSpeedUpgradeCount}/5)";
+                if (damageText != null)
+                    damageText.text = $"({gameManager.damageUpgradeCount}/5)";
+                if (rangeText != null)
+                    rangeText.text = $"({gameManager.attackSpeedUpgradeCount}/5)";
+
                 if (healthPriceText != null) healthPriceText.text = "Price: " + gameManager.healthPrice.ToString();
-                if (speedPriceText != null) speedPriceText.text = "Price: " + gameManager.speedPrice.ToString();
+                if (speedPriceText != null) speedPriceText.text = "Price: " + gameManager.moveSpeedPrice.ToString();
                 if (damagePriceText != null) damagePriceText.text = "Price: " + gameManager.damagePrice.ToString();
-                if (rangePriceText != null) rangePriceText.text = "Price: " + gameManager.rangePrice.ToString();
+                if (rangePriceText != null) rangePriceText.text = "Price: " + gameManager.attackSpeedPrice.ToString();
             }
 
             characterArt.enabled = false;
