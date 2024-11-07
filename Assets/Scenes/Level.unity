@@ -36563,7 +36563,7 @@ MonoBehaviour:
   wolfPrefab: {fileID: 5711824368328486100, guid: 27514f7bad567f64a9a3f7efc2a1a2a0, type: 3}
   goblinPrefab: {fileID: 5711824368328486100, guid: ce42283c56831004a907b7ded92b3d96, type: 3}
   ogrePrefab: {fileID: 5711824368328486100, guid: 58a99b47094b54048b6f13a45b8a6d35, type: 3}
-  spawnRadius: 100
+  spawnRadius: 25
   navMeshSampleDistance: 100
 --- !u!4 &1644560208
 Transform:

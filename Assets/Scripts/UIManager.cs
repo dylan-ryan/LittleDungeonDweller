@@ -36,6 +36,10 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI damagePriceText;
     public TextMeshProUGUI rangePriceText;
 
+    [Header("Results Stats")]
+    public TextMeshProUGUI currencyGainedText;
+    public TextMeshProUGUI enemiesKilledText;
+
     public enum GameState { MainMenu, Upgrade, Pause, Gameplay, Options, Results, Victory }
     [Header("GameStates")]
     public GameState gameState;
@@ -110,7 +114,14 @@ public class UIManager : MonoBehaviour
         characterArt.enabled = false;
         character.GetComponent<CharacterController>().enabled = false;
         character.GetComponent<HealthSystem>().enabled = false;
+
+        if (currencyGainedText != null)
+            currencyGainedText.text = "Currency Gained: " + gameManager.currencyGainedLastRun.ToString();
+
+        if (enemiesKilledText != null)
+            enemiesKilledText.text = "Enemies Killed: " + gameManager.enemiesKilledLastRun.ToString();
     }
+
 
     public void MainMenuUI()
     {
@@ -298,7 +309,6 @@ public class UIManager : MonoBehaviour
     public void ButtonSwitchScreen(string screenName)
     {
         previousGameState = gameState;
-
         mainMenu.SetActive(false);
         pause.SetActive(false);
         gameplay.SetActive(false);

@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     public int speedPrice;
     public int healthPrice;
 
+    public int currencyGainedLastRun = 0;
+    public int enemiesKilledLastRun = 0;
+
     void Awake()
     {
         //If GameManager doesnt exist set this as the manager and dont destruction on load
@@ -35,9 +38,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void StartNewRun()
+    {
+        currencyGainedLastRun = 0;
+        enemiesKilledLastRun = 0;
+    }
+
+
     public void AddCurrency(int gained)
     {
-        currency = currency + gained;
+        currency += gained;
+        currencyGainedLastRun += gained;
+        Debug.Log("Currency added: " + gained + ", Total currency gained this run: " + currencyGainedLastRun);
     }
 
     // Update is called once per frame

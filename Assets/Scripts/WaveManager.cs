@@ -11,6 +11,7 @@ public class WaveManager : MonoBehaviour
     public GameObject wolfPrefab;
     public GameObject goblinPrefab;
     public GameObject ogrePrefab;
+    private GameManager gameManager;
 
     // Reference to the player GameObject and its Transform
     private GameObject player;
@@ -39,6 +40,7 @@ public class WaveManager : MonoBehaviour
     private void Awake()
     {
         // Find the player object in the scene and store its Transform
+        gameManager = FindAnyObjectByType<GameManager>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerTransform = player.transform;
         // Find the slider and wave counter
@@ -155,14 +157,16 @@ public class WaveManager : MonoBehaviour
     }
 
     // Method to generate a random spawn position around the player
+    // Method to generate a random spawn position exactly on the spawn radius around the player
     Vector3 GetRandomSpawnPosition()
     {
         float angle = Random.Range(0, 2 * Mathf.PI); // Random angle for circular spawning
-        float distance = Random.Range(5f, spawnRadius); // Random distance within the spawn radius
-        // Calculate the offset position based on angle and distance
+        float distance = spawnRadius; // Set the distance to exactly the spawn radius
+                                      // Calculate the offset position based on angle and fixed distance
         Vector3 offset = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * distance;
         return playerTransform.position + offset; // Return the final spawn position
     }
+
 
     // Call this method when an enemy dies
     public void OnEnemyDeath(GameObject enemy)
@@ -170,6 +174,7 @@ public class WaveManager : MonoBehaviour
         // Remove the enemy from the active list
         activeEnemies.Remove(enemy);
         progressBar.value = activeEnemies.Count;
+        gameManager.enemiesKilledLastRun++;
     }
     private void PointArrowToNearestEnemy()
     {
