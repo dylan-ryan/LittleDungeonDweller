@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     public GameObject victory;
 
     private bool hasShownIntro = false;
+    private bool hasStartedNewRun = false;
 
     private GameState previousGameState;
 
@@ -157,12 +158,19 @@ public class UIManager : MonoBehaviour
             character.GetComponent<CharacterController>().enabled = true;
         }
 
+        if (!hasStartedNewRun)
+        {
+            gameManager.StartNewRun();
+            hasStartedNewRun = true;
+        }
+
         if (!hasShownIntro && introPanel != null)
         {
             introPanel.SetActive(true);
             Time.timeScale = 0f;
         }
     }
+
 
     public void CloseIntroPanel()
     {
@@ -176,6 +184,7 @@ public class UIManager : MonoBehaviour
 
     public void UpgradeUI()
     {
+        hasStartedNewRun = false;
         character.GetComponent<HealthSystem>().enabled = true;
         ManagerUpgradeUI();
         CharacterControllerScript characterControllerScript = character.GetComponent<CharacterControllerScript>();

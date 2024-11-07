@@ -9234,7 +9234,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 243812392}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ButtonSpeed
+        m_MethodName: ButtonMoveSpeed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
