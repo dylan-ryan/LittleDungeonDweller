@@ -105,6 +105,7 @@ public class UIManager : MonoBehaviour
         ManagerResultsUI();
         characterArt.enabled = false;
         character.GetComponent<CharacterController>().enabled = false;
+        character.GetComponent<HealthSystem>().enabled = false;
     }
 
     public void MainMenuUI()
@@ -112,6 +113,7 @@ public class UIManager : MonoBehaviour
         ManagerMainMenuUI();
         characterArt.enabled = false;
         character.GetComponent<CharacterController>().enabled = false;
+        character.GetComponent<HealthSystem>().enabled = true;
     }
 
     public void PauseUI()
@@ -125,6 +127,7 @@ public class UIManager : MonoBehaviour
         ManagerGameplayUI();
         CharacterControllerScript characterControllerScript = character.GetComponent<CharacterControllerScript>();
         characterControllerScript.controlsEnabled = true;
+        character.GetComponent<HealthSystem>().enabled = true;
 
         if (character != null)
         {
@@ -155,6 +158,7 @@ public class UIManager : MonoBehaviour
         CharacterControllerScript characterControllerScript = character.GetComponent<CharacterControllerScript>();
         characterControllerScript.SetControlsEnabled(false);
         EventSystem.current.SetSelectedGameObject(null);
+        character.GetComponent<HealthSystem>().enabled = true;
 
         if (character != null)
         {
@@ -203,7 +207,7 @@ public class UIManager : MonoBehaviour
         gameplay.SetActive(false);
         results.SetActive(true);
         options.SetActive(false);
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
     }
 
     public void ManagerUpgradeUI()
