@@ -64,6 +64,13 @@ public class WaveManager : MonoBehaviour
         // Continue spawning waves as long as the game is running
         while (true)
         {
+            // Check for victory condition at wave 20
+            if (waveCount >= 20)
+            {
+                TriggerVictory();
+                yield break;
+            }
+
             // Spawn the next wave
             SpawnWave();
 
@@ -79,6 +86,14 @@ public class WaveManager : MonoBehaviour
             // Move to the next wave
             waveCount++;
         }
+    }
+
+    // Method to trigger victory UI
+    void TriggerVictory()
+    {
+        // Assuming you have a method in your UIManager to display Victory screen
+        UIManager.manager.ButtonSwitchScreen("Victory");
+        Debug.Log("Victory! You've reached wave 20.");
     }
 
     // Method to spawn a wave of enemies

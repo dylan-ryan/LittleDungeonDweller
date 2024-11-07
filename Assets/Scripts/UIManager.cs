@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     public GameObject options;
     public GameObject results;
     public GameObject introPanel;
+    public GameObject victory;
 
     private bool hasShownIntro = false;
 
@@ -35,7 +36,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI damagePriceText;
     public TextMeshProUGUI rangePriceText;
 
-    public enum GameState { MainMenu, Upgrade, Pause, Gameplay, Options, Results }
+    public enum GameState { MainMenu, Upgrade, Pause, Gameplay, Options, Results, Victory }
     [Header("GameStates")]
     public GameState gameState;
 
@@ -76,6 +77,9 @@ public class UIManager : MonoBehaviour
                 break;
             case GameState.Results:
                 ResultsUI();
+                break;
+            case GameState.Victory:
+                VictoryUI();
                 break;
         }
 
@@ -120,6 +124,13 @@ public class UIManager : MonoBehaviour
     {
         ManagerPauseUI();
         character.GetComponent<CharacterController>().enabled = false;
+    }
+    public void VictoryUI()
+    {
+        ManagerVictoryUI();
+        characterArt.enabled = false;
+        character.GetComponent<CharacterController>().enabled = false;
+        character.GetComponent<HealthSystem>().enabled = false;
     }
 
     public void GameplayUI()
@@ -187,8 +198,23 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ManagerVictoryUI()
+    {
+        victory.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        mainMenu.SetActive(false);
+        upgrade.SetActive(false);
+        pause.SetActive(false);
+        gameplay.SetActive(false);
+        results.SetActive(false);
+        options.SetActive(false);
+        Time.timeScale = 0f;
+    }
+
     public void ManagerOptionsUI()
     {
+        victory.SetActive(false);
         options.SetActive(true);
         pause.SetActive(false);
         upgrade.SetActive(false);
@@ -199,6 +225,7 @@ public class UIManager : MonoBehaviour
 
     public void ManagerResultsUI()
     {
+        victory.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         mainMenu.SetActive(false);
@@ -212,6 +239,7 @@ public class UIManager : MonoBehaviour
 
     public void ManagerUpgradeUI()
     {
+        victory.SetActive(false);
         options.SetActive(false);
         results.SetActive(false);
         Cursor.visible = true;
@@ -225,6 +253,7 @@ public class UIManager : MonoBehaviour
 
     public void ManagerMainMenuUI()
     {
+        victory.SetActive(false);
         options.SetActive(false);
         results.SetActive(false);
         Cursor.visible = true;
@@ -237,6 +266,7 @@ public class UIManager : MonoBehaviour
 
     public void ManagerPauseUI()
     {
+        victory.SetActive(false);
         options.SetActive(false);
         results.SetActive(false);
         Cursor.visible = true;
@@ -250,6 +280,7 @@ public class UIManager : MonoBehaviour
 
     public void ManagerGameplayUI()
     {
+        victory.SetActive(false);
         options.SetActive(false);
         results.SetActive(false);
         mainMenu.SetActive(false);
@@ -274,6 +305,7 @@ public class UIManager : MonoBehaviour
         upgrade.SetActive(false);
         options.SetActive(false);
         results.SetActive(false);
+        victory.SetActive(false);
 
         switch (screenName)
         {
@@ -306,6 +338,11 @@ public class UIManager : MonoBehaviour
                 results.SetActive(true);
                 gameState = GameState.Results;
                 ManagerResultsUI();
+                break;
+            case "Victory":
+                victory.SetActive(true);
+                gameState = GameState.Victory;
+                ManagerVictoryUI();
                 break;
             default:
                 Debug.LogWarning("Screen name not recognized: " + screenName);
