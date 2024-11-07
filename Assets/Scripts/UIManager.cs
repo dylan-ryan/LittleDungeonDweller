@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
 
     private bool hasShownIntro = false;
 
+    private GameState previousGameState;
 
     [HideInInspector] public GameObject character;
     private SpriteRenderer characterArt;
@@ -256,6 +257,8 @@ public class UIManager : MonoBehaviour
 
     public void ButtonSwitchScreen(string screenName)
     {
+        previousGameState = gameState;
+
         mainMenu.SetActive(false);
         pause.SetActive(false);
         gameplay.SetActive(false);
@@ -299,5 +302,9 @@ public class UIManager : MonoBehaviour
                 Debug.LogWarning("Screen name not recognized: " + screenName);
                 break;
         }
+    }
+    public void ButtonBackToPreviousScreen()
+    {
+        ButtonSwitchScreen(previousGameState.ToString());
     }
 }
