@@ -65,7 +65,7 @@ public class WaveManager : MonoBehaviour
         while (true)
         {
             // Check for victory condition at wave 20
-            if (waveCount >= 20)
+            if (waveCount >= 21)
             {
                 TriggerVictory();
                 yield break;

@@ -165,11 +165,11 @@ public class UIManager : MonoBehaviour
 
     public void UpgradeUI()
     {
+        character.GetComponent<HealthSystem>().enabled = true;
         ManagerUpgradeUI();
         CharacterControllerScript characterControllerScript = character.GetComponent<CharacterControllerScript>();
         characterControllerScript.SetControlsEnabled(false);
         EventSystem.current.SetSelectedGameObject(null);
-        character.GetComponent<HealthSystem>().enabled = true;
 
         if (character != null)
         {
