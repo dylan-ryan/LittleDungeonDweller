@@ -202,11 +202,13 @@ public class UIManager : MonoBehaviour
         pause.SetActive(false);
         gameplay.SetActive(false);
         results.SetActive(true);
+        options.SetActive(false);
         Time.timeScale = 0f;
     }
 
     public void ManagerUpgradeUI()
     {
+        options.SetActive(false);
         results.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -219,6 +221,7 @@ public class UIManager : MonoBehaviour
 
     public void ManagerMainMenuUI()
     {
+        options.SetActive(false);
         results.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -230,6 +233,7 @@ public class UIManager : MonoBehaviour
 
     public void ManagerPauseUI()
     {
+        options.SetActive(false);
         results.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -242,6 +246,7 @@ public class UIManager : MonoBehaviour
 
     public void ManagerGameplayUI()
     {
+        options.SetActive(false);
         results.SetActive(false);
         mainMenu.SetActive(false);
         pause.SetActive(false);
