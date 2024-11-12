@@ -77,7 +77,7 @@ public class WaveManager : MonoBehaviour
             SpawnWave();
 
             // Set up the UI for the current wave
-            waveCounter.text = "Wave: " + waveCount;
+            waveCounter.text = "Wave: " + waveCount + " / 20";
             progressBar.maxValue = enemiesInWave;
             progressBar.value = enemiesInWave;
 
@@ -105,7 +105,7 @@ public class WaveManager : MonoBehaviour
         activeEnemies.Clear();
 
         // Determine how many of each enemy to spawn based on the wave count
-        int wolfCount = Mathf.Min(waveCount, 5);           // Max 5 wolves
+        int wolfCount = Mathf.Min(waveCount);           // Wolves
         int goblinCount = Mathf.Max(0, waveCount - 5);     // Goblins increase after wave 5
         int ogreCount = Mathf.Max(0, waveCount - 10);       // Ogres increase after wave 10
 
