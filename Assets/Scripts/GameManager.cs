@@ -20,15 +20,15 @@ public class GameManager : MonoBehaviour
     public int moveSpeedPrice;
     public int healthPrice;
 
-    public int currencyGainedLastRun = 0;
-    public int enemiesKilledLastRun = 0;
+    [HideInInspector] public int currencyGainedLastRun = 0;
+    [HideInInspector] public int enemiesKilledLastRun = 0;
 
     // Upgrade counters
-    public int damageUpgradeCount = 0;
-    public int attackSpeedUpgradeCount = 0;
-    public int moveSpeedUpgradeCount = 0;
-    public int healthUpgradeCount = 0;
-    public const int maxUpgrades = 5;
+    [HideInInspector] public int damageUpgradeCount = 0;
+    [HideInInspector] public int attackSpeedUpgradeCount = 0;
+    [HideInInspector] public int moveSpeedUpgradeCount = 0;
+    [HideInInspector] public int healthUpgradeCount = 0;
+    [HideInInspector] public const int maxUpgrades = 5;
 
 
 
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         {
             characterControllerScript.attackDamage += 1;
             currency -= damagePrice;
-            damagePrice += damagePrice;
+            damagePrice += damagePrice * 2;
             damageUpgradeCount++;
 
             if (damageUpgradeCount >= maxUpgrades)
