@@ -38,9 +38,11 @@ public class CharacterControllerScript : MonoBehaviour
     private float cooldownTimer = 0f;
 
     public static CharacterControllerScript manager;
+    private HealthSystem healthSystem;
 
     void Awake()
     {
+        healthSystem = GetComponent<HealthSystem>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -98,7 +100,7 @@ public class CharacterControllerScript : MonoBehaviour
 
     private void Update()
     {
-        if (controlsEnabled)
+        if (controlsEnabled && healthSystem.enabled == true)
         {
             cooldownTimer -= Time.deltaTime;
 
