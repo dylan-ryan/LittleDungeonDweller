@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
     {
         if (currency >= healthPrice && healthUpgradeCount < maxUpgrades)
         {
-            health += 1;
+            health += 2;
             currency -= healthPrice;
             healthPrice += healthPrice;
             healthUpgradeCount++;

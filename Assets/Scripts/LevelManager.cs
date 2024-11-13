@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     public UIManager UIManager;
 
     [SerializeField] private GameObject spawn;
-    public int starterHealth = 3;
+    public int starterHealth = 2;
 
     public Scene currentScene;
 
