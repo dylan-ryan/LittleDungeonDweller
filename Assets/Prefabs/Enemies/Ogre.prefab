@@ -54,10 +54,7 @@ MonoBehaviour:
   defaultSprite: {fileID: -1535185901, guid: 4ece9157cf4278440a4b5113b837d926, type: 3}
   attackSprite: {fileID: 21300000, guid: 692773b09677beb43ad4891b4f567364, type: 3}
   currentState: 0
-  patrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  chaseRange: 10
+  chaseRange: 1000
   attackRange: 3
   attackCooldown: 5
   attackDamage: 3

@@ -12,6 +12,7 @@ public class WaveManager : MonoBehaviour
     public GameObject goblinPrefab;
     public GameObject ogrePrefab;
     private GameManager gameManager;
+    private LevelManager levelManager;
 
     // Reference to the player GameObject and its Transform
     private GameObject player;
@@ -39,6 +40,7 @@ public class WaveManager : MonoBehaviour
 
     private void Awake()
     {
+        levelManager = FindAnyObjectByType<LevelManager>();
         // Find the player object in the scene and store its Transform
         gameManager = FindAnyObjectByType<GameManager>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -116,6 +118,8 @@ public class WaveManager : MonoBehaviour
         SpawnEnemies(wolfPrefab, wolfCount);
         SpawnEnemies(goblinPrefab, goblinCount);
         SpawnEnemies(ogrePrefab, ogreCount);
+
+        player.GetComponent<HealthSystem>().health = levelManager.starterHealth + gameManager.health;
     }
 
 
