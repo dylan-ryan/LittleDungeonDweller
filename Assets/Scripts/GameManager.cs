@@ -86,9 +86,9 @@ public class GameManager : MonoBehaviour
     {
         if (currency >= attackSpeedPrice && attackSpeedUpgradeCount < maxUpgrades)
         {
-            characterControllerScript.attackCooldown = Mathf.Max(0.1f, characterControllerScript.attackCooldown - 0.1f);
+            characterControllerScript.attackCooldown -= 0.1f;
             currency -= attackSpeedPrice;
-            attackSpeedPrice += attackSpeedPrice;
+            attackSpeedPrice += attackSpeedPrice * 2;
             attackSpeedUpgradeCount++;
 
             if (attackSpeedUpgradeCount >= maxUpgrades)
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         {
             characterControllerScript.moveSpeed += 1;
             currency -= moveSpeedPrice;
-            moveSpeedPrice += moveSpeedPrice;
+            moveSpeedPrice += moveSpeedPrice * 2;
             moveSpeedUpgradeCount++;
 
             if (moveSpeedUpgradeCount >= maxUpgrades)
@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         {
             health += 2;
             currency -= healthPrice;
-            healthPrice += healthPrice;
+            healthPrice += healthPrice * 2;
             healthUpgradeCount++;
 
             if (healthUpgradeCount >= maxUpgrades)
