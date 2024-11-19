@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
-  speed: 5
+  speed: 8
   frontMarker: {fileID: 2416447009132327505}
   backMarker: {fileID: 6846654835862877272}
 --- !u!54 &3343040624373331175
