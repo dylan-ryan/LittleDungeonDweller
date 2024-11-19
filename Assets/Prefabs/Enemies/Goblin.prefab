@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 752549783573921644}
-  - component: {fileID: 1243167911775130961}
+  - component: {fileID: 5556979617187753180}
   - component: {fileID: 1671449692171366454}
   - component: {fileID: 4354776573295698745}
   - component: {fileID: 124625536267209858}
@@ -39,7 +39,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1243167911775130961
+--- !u!114 &5556979617187753180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,16 +48,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 5711824368328486100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab79f3c9ab1ad184385a9ee1dfc2f506, type: 3}
+  m_Script: {fileID: 11500000, guid: 88cfdecdf7c3d964fac0d63c014dbf86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 783804310, guid: 22be3c8c77b7b31498f11917b5bab6b5, type: 3}
   attackSprite: {fileID: 21300000, guid: 61c1ffe99dc6b6744a326887734ca49a, type: 3}
+  projectilePrefab: {fileID: 4329573685331814931, guid: 9076613f0a2f55f47981f89c1df0ebda, type: 3}
+  firePoint: {fileID: 752549783573921644}
   currentState: 0
   chaseRange: 1000
   attackRange: 5
   attackCooldown: 2
-  attackDamage: 1
+  attackDamage: 2
+  projectileSpeed: 5
   coin: {fileID: 6389368986838399647, guid: 12ece7c1f56e2a347b3724806dcd2d32, type: 3}
 --- !u!114 &1671449692171366454
 MonoBehaviour:
