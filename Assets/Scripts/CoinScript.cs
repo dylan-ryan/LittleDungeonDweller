@@ -21,11 +21,12 @@ public class CoinScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if(other == player.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
             gameManager.AddCurrency(worth);
             Destroy(gameObject);
         }
     }
+
 }

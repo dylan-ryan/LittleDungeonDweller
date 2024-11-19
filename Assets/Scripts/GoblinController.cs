@@ -89,7 +89,16 @@ public class GoblinController : MonoBehaviour
             waveManager.OnEnemyDeath(this.gameObject);
             Vector3 enemyLocation = transform.position;
             Destroy(gameObject);
-            Instantiate(coin, enemyLocation, Quaternion.identity);
+            RaycastHit hit;
+            Vector3 spawnPosition = enemyLocation;
+
+            if (Physics.Raycast(enemyLocation + Vector3.up * 10, Vector3.down, out hit, 20f))
+            {
+                spawnPosition = hit.point;
+            }
+
+            Instantiate(coin, spawnPosition, Quaternion.identity);
+
         }
     }
 
