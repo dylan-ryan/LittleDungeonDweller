@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;  // For managing the list of active enemies
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 
 public class WaveManager : MonoBehaviour
 {
@@ -182,70 +183,46 @@ public class WaveManager : MonoBehaviour
     }
     private void PointArrowToNearestEnemy()
     {
-        if (arrowUI == null || Camera.main == null) return;
+        if (arrowUI == null || Camera.main == null || playerTransform == null) return;
 
         // Find the nearest enemy
-        GameObject nearestEnemy = null;
-        float closestDistance = Mathf.Infinity;
+        GameObject nearestEnemy = activeEnemies
+            .Where(enemy => enemy != null)
+            .OrderBy(enemy => Vector3.Distance(playerTransform.position, enemy.transform.position))
+            .FirstOrDefault();
 
-        activeEnemies.RemoveAll(enemy => enemy == null);
-
-        foreach (GameObject enemy in activeEnemies)
+        if (nearestEnemy == null)
         {
-            if (enemy == null) continue;
-
-            float distance = Vector3.Distance(playerTransform.position, enemy.transform.position);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                nearestEnemy = enemy;
-            }
-        }
-
-        if (nearestEnemy != null)
-        {
-            // Get the screen position of the enemy relative to the camera
-            Vector3 enemyScreenPosition = Camera.main.WorldToScreenPoint(nearestEnemy.transform.position);
-
-            // Check if the enemy is on-screen
-            bool isOnScreen = enemyScreenPosition.z > 0 &&
-                              enemyScreenPosition.x > 0 && enemyScreenPosition.x < Screen.width &&
-                              enemyScreenPosition.y > 0 && enemyScreenPosition.y < Screen.height;
-
-            if (isOnScreen)
-            {
-                // Hide the arrow if the enemy is on-screen
-                arrowUI.gameObject.SetActive(false);
-            }
-            else
-            {
-                // Show the arrow and place it at the edge of the screen
-                arrowUI.gameObject.SetActive(true);
-
-                // Calculate direction to the enemy in screen space
-                Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-                Vector3 directionToEnemy = (enemyScreenPosition - screenCenter).normalized;
-
-                // Position the arrow on the edge based on direction
-                float edgeDistance = Mathf.Min(Screen.width, Screen.height) / 2 - 50; // Adjust the 50 for padding
-                Vector3 edgePosition = screenCenter + directionToEnemy * edgeDistance;
-
-                // Clamp the position to stay within screen bounds
-                edgePosition.x = Mathf.Clamp(edgePosition.x, 0, Screen.width);
-                edgePosition.y = Mathf.Clamp(edgePosition.y, 0, Screen.height);
-
-                // Set the arrow's position and rotation
-                arrowUI.position = edgePosition;
-                float angle = Mathf.Atan2(directionToEnemy.y, directionToEnemy.x) * Mathf.Rad2Deg;
-                arrowUI.rotation = Quaternion.Euler(0, 0, angle);
-            }
-        }
-        else
-        {
-            // Hide the arrow if there are no enemies
             arrowUI.gameObject.SetActive(false);
+            return;
         }
+
+        // Get the enemy's screen position
+        Vector3 enemyScreenPos = Camera.main.WorldToScreenPoint(nearestEnemy.transform.position);
+        bool isOnScreen = enemyScreenPos.z > 0 &&
+                          enemyScreenPos.x > 0 && enemyScreenPos.x < Screen.width &&
+                          enemyScreenPos.y > 0 && enemyScreenPos.y < Screen.height;
+
+        if (isOnScreen)
+        {
+            arrowUI.gameObject.SetActive(false);
+            return;
+        }
+
+        // Show the arrow and position it at the screen edge
+        arrowUI.gameObject.SetActive(true);
+        Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        Vector3 direction = (enemyScreenPos - screenCenter).normalized;
+
+        float edgeDistance = Mathf.Min(Screen.width, Screen.height) / 2 - 50; // Adjust for padding
+        Vector3 edgePos = screenCenter + direction * edgeDistance;
+        edgePos.x = Mathf.Clamp(edgePos.x, 0, Screen.width);
+        edgePos.y = Mathf.Clamp(edgePos.y, 0, Screen.height);
+
+        arrowUI.position = edgePos;
+        arrowUI.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
     }
+
 
 
 }
