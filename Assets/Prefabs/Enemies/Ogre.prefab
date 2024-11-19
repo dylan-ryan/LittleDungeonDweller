@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 752549783573921644}
-  - component: {fileID: 1243167911775130961}
   - component: {fileID: 1671449692171366454}
   - component: {fileID: 4354776573295698745}
+  - component: {fileID: -3297023195792884694}
   - component: {fileID: 124625536267209858}
   - component: {fileID: 1566846230313993661}
   - component: {fileID: 1799749714633749269}
@@ -39,26 +39,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1243167911775130961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5711824368328486100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab79f3c9ab1ad184385a9ee1dfc2f506, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultSprite: {fileID: -1535185901, guid: 4ece9157cf4278440a4b5113b837d926, type: 3}
-  attackSprite: {fileID: 21300000, guid: 692773b09677beb43ad4891b4f567364, type: 3}
-  currentState: 0
-  chaseRange: 1000
-  attackRange: 3
-  attackCooldown: 5
-  attackDamage: 3
-  coin: {fileID: 6389368986838399647, guid: 34f8d71d69109534e8fbd248b43f93a3, type: 3}
 --- !u!114 &1671449692171366454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,6 +64,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
+--- !u!114 &-3297023195792884694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5711824368328486100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d3a53b88f4f6842b67cba44ee0f7cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSprite: {fileID: -1535185901, guid: 4ece9157cf4278440a4b5113b837d926, type: 3}
+  attackSprite: {fileID: 21300000, guid: 692773b09677beb43ad4891b4f567364, type: 3}
+  currentState: 0
+  chaseRange: 1000
+  attackRange: 3
+  attackCooldown: 2
+  attackDamage: 3
+  coin: {fileID: 6389368986838399647, guid: 34f8d71d69109534e8fbd248b43f93a3, type: 3}
 --- !u!136 &124625536267209858
 CapsuleCollider:
   m_ObjectHideFlags: 0
