@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public GameObject results;
     public GameObject introPanel;
     public GameObject victory;
+    public GameObject credits;
 
     private bool hasShownIntro = false;
     private bool hasStartedNewRun = false;
@@ -41,7 +42,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI currencyGainedText;
     public TextMeshProUGUI enemiesKilledText;
 
-    public enum GameState { MainMenu, Upgrade, Pause, Gameplay, Options, Results, Victory }
+    public enum GameState { MainMenu, Upgrade, Pause, Gameplay, Options, Results, Victory, Credits }
     [Header("GameStates")]
     public GameState gameState;
 
@@ -86,6 +87,9 @@ public class UIManager : MonoBehaviour
             case GameState.Victory:
                 VictoryUI();
                 break;
+            case GameState.Credits:
+                CreditsUI();
+                break;
         }
 
         if (Input.GetKeyUp(KeyCode.Escape) && gameState == GameState.Gameplay)
@@ -102,6 +106,11 @@ public class UIManager : MonoBehaviour
             gameState = GameState.Results;
             character.GetComponent<HealthSystem>().health = levelManager.starterHealth + gameManager.health;
         }
+    }
+
+    public void CreditsUI()
+    {
+        ManagerCreditsUI();
     }
 
     public void OptionsUI()
@@ -222,11 +231,26 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ManagerCreditsUI()
+    {
+        credits.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        mainMenu.SetActive(false);
+        victory.SetActive(false);
+        upgrade.SetActive(false);
+        pause.SetActive(false);
+        gameplay.SetActive(false);
+        results.SetActive(false);
+        options.SetActive(false);
+    }
+
     public void ManagerVictoryUI()
     {
         victory.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        credits.SetActive(false);
         mainMenu.SetActive(false);
         upgrade.SetActive(false);
         pause.SetActive(false);
@@ -238,6 +262,7 @@ public class UIManager : MonoBehaviour
 
     public void ManagerOptionsUI()
     {
+        credits.SetActive(false);
         victory.SetActive(false);
         options.SetActive(true);
         pause.SetActive(false);
@@ -249,6 +274,7 @@ public class UIManager : MonoBehaviour
 
     public void ManagerResultsUI()
     {
+        credits.SetActive(false);
         victory.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -263,6 +289,7 @@ public class UIManager : MonoBehaviour
 
     public void ManagerUpgradeUI()
     {
+        credits.SetActive(false);
         victory.SetActive(false);
         options.SetActive(false);
         results.SetActive(false);
@@ -277,6 +304,7 @@ public class UIManager : MonoBehaviour
 
     public void ManagerMainMenuUI()
     {
+        credits.SetActive(false);
         victory.SetActive(false);
         options.SetActive(false);
         results.SetActive(false);
@@ -290,6 +318,7 @@ public class UIManager : MonoBehaviour
 
     public void ManagerPauseUI()
     {
+        credits.SetActive(false);
         victory.SetActive(false);
         options.SetActive(false);
         results.SetActive(false);
@@ -304,6 +333,7 @@ public class UIManager : MonoBehaviour
 
     public void ManagerGameplayUI()
     {
+        credits.SetActive(false);
         victory.SetActive(false);
         options.SetActive(false);
         results.SetActive(false);
@@ -322,6 +352,7 @@ public class UIManager : MonoBehaviour
     public void ButtonSwitchScreen(string screenName)
     {
         previousGameState = gameState;
+        credits.SetActive(false);
         mainMenu.SetActive(false);
         pause.SetActive(false);
         gameplay.SetActive(false);
@@ -366,6 +397,11 @@ public class UIManager : MonoBehaviour
                 victory.SetActive(true);
                 gameState = GameState.Victory;
                 ManagerVictoryUI();
+                break;
+            case "Credits":
+                credits.SetActive(true);
+                gameState = GameState.Credits;
+                ManagerCreditsUI();
                 break;
             default:
                 Debug.LogWarning("Screen name not recognized: " + screenName);
