@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
 
     private bool hasShownIntro = false;
     private bool hasStartedNewRun = false;
+    private bool hasPlayedMusic = false;
 
     private GameState previousGameState;
 
@@ -25,6 +26,7 @@ public class UIManager : MonoBehaviour
 
     public LevelManager levelManager;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private SoundManager soundManager;
 
     [Header("Gameplay Stats")]
     public TextMeshProUGUI currencyText;
@@ -168,6 +170,12 @@ public class UIManager : MonoBehaviour
         {
             introPanel.SetActive(true);
             Time.timeScale = 0f;
+        }
+
+        if (!hasPlayedMusic && SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayMusic(0);
+            hasPlayedMusic = true;
         }
     }
 
@@ -321,6 +329,8 @@ public class UIManager : MonoBehaviour
 
     public void ButtonSwitchScreen(string screenName)
     {
+        hasPlayedMusic = false;
+
         previousGameState = gameState;
         mainMenu.SetActive(false);
         pause.SetActive(false);
