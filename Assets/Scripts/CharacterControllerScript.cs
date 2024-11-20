@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,6 +12,10 @@ public class CharacterControllerScript : MonoBehaviour
     public bool controlsEnabled;
     private Animator anim;
     private SpriteRenderer spriteRenderer;
+
+    [Header("Arrow UI Element")]
+    [SerializeField] private RectTransform arrow;
+    [SerializeField] private Camera mainCamera;
 
     [Header("Player Movement")]
     [SerializeField] public float moveSpeed = 10f;
@@ -112,6 +117,19 @@ public class CharacterControllerScript : MonoBehaviour
                 cooldownTimer = attackCooldown;
             }
         }
+
+        if (controlsEnabled && healthSystem.enabled == true)
+        {
+            UpdateArrow();
+            cooldownTimer -= Time.deltaTime;
+            cooldownImage.fillAmount = cooldownTimer / attackCooldown;
+
+            if (Input.GetKeyDown(KeyCode.Space) && cooldownTimer <= 0)
+            {
+                Attack();
+                cooldownTimer = attackCooldown;
+            }
+        }
     }
 
     public void Attack()
@@ -162,4 +180,46 @@ public class CharacterControllerScript : MonoBehaviour
     {
         controlsEnabled = enabled;
     }
+
+    private void UpdateArrow()
+    {
+        Collider[] enemies = Physics.OverlapSphere(transform.position, 100f, enemyLayer);
+
+        if (enemies.Length == 0)
+        {
+            arrow.gameObject.SetActive(false);
+            return;
+        }
+
+        Collider nearestEnemy = enemies.OrderBy(e => Vector3.Distance(transform.position, e.transform.position)).First();
+        Vector3 enemyPosition = nearestEnemy.transform.position;
+
+        Vector3 viewportPoint = mainCamera.WorldToViewportPoint(enemyPosition);
+        bool isOnScreen = viewportPoint.z > 0 &&
+                          viewportPoint.x > 0 && viewportPoint.x < 1 &&
+                          viewportPoint.y > 0 && viewportPoint.y < 1;
+
+        if (isOnScreen)
+        {
+            arrow.gameObject.SetActive(false);
+        }
+        else
+        {
+            arrow.gameObject.SetActive(true);
+
+            Vector3 direction = (enemyPosition - transform.position).normalized;
+            float radius = 4f;
+            Vector3 circlePosition = transform.position + direction * radius;
+
+            Vector3 screenPosition = mainCamera.WorldToScreenPoint(circlePosition);
+
+            arrow.position = screenPosition;
+
+            float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
+            arrow.rotation = Quaternion.Euler(0, 0, angle);
+        }
+    }
+
+
+
 }

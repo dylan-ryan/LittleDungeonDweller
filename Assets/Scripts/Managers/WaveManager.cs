@@ -59,8 +59,8 @@ public class WaveManager : MonoBehaviour
     }
     void Update()
     {
-        if (activeEnemies.Count > 0)
-            PointArrowToNearestEnemy();
+        //if (activeEnemies.Count > 0)
+            //PointArrowToNearestEnemy();
     }
 
     // Coroutine to manage spawning waves of enemies
@@ -181,7 +181,7 @@ public class WaveManager : MonoBehaviour
         progressBar.value = activeEnemies.Count;
         gameManager.enemiesKilledLastRun++;
     }
-    private void PointArrowToNearestEnemy()
+    /*private void PointArrowToNearestEnemy()
     {
         if (arrowUI == null || Camera.main == null || playerTransform == null) return;
 
@@ -197,8 +197,18 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
-        // Get the enemy's screen position
-        Vector3 enemyScreenPos = Camera.main.WorldToScreenPoint(nearestEnemy.transform.position);
+        // Calculate direction from the player to the enemy in world space
+        Vector3 directionToEnemy = nearestEnemy.transform.position - playerTransform.position;
+
+        // Handle cases where the enemy is behind the player
+        Vector3 cameraForward = Camera.main.transform.forward;
+        if (Vector3.Dot(cameraForward, directionToEnemy) < 0)
+        {
+            directionToEnemy = -directionToEnemy; // Flip the direction
+        }
+
+        // Convert the direction to screen space
+        Vector3 enemyScreenPos = Camera.main.WorldToScreenPoint(playerTransform.position + directionToEnemy);
         bool isOnScreen = enemyScreenPos.z > 0 &&
                           enemyScreenPos.x > 0 && enemyScreenPos.x < Screen.width &&
                           enemyScreenPos.y > 0 && enemyScreenPos.y < Screen.height;
@@ -212,16 +222,17 @@ public class WaveManager : MonoBehaviour
         // Show the arrow and position it at the screen edge
         arrowUI.gameObject.SetActive(true);
         Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-        Vector3 direction = (enemyScreenPos - screenCenter).normalized;
+        Vector3 screenDirection = (enemyScreenPos - screenCenter).normalized;
 
         float edgeDistance = Mathf.Min(Screen.width, Screen.height) / 2 - 50; // Adjust for padding
-        Vector3 edgePos = screenCenter + direction * edgeDistance;
+        Vector3 edgePos = screenCenter + screenDirection * edgeDistance;
         edgePos.x = Mathf.Clamp(edgePos.x, 0, Screen.width);
         edgePos.y = Mathf.Clamp(edgePos.y, 0, Screen.height);
 
         arrowUI.position = edgePos;
-        arrowUI.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
-    }
+        arrowUI.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(screenDirection.y, screenDirection.x) * Mathf.Rad2Deg);
+    }*/
+
 
 
 
