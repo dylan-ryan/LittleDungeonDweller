@@ -141,6 +141,12 @@ public class UIManager : MonoBehaviour
         characterArt.enabled = false;
         character.GetComponent<CharacterController>().enabled = false;
         character.GetComponent<HealthSystem>().enabled = true;
+
+        if (!hasPlayedMusic && SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayMusic(1);
+            hasPlayedMusic = true;
+        }
     }
 
     public void PauseUI()

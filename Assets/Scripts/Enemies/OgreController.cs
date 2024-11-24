@@ -148,6 +148,8 @@ public class OgreController : MonoBehaviour
             playerHealth.TakeDamage(attackDamage);
             Debug.Log("Ogre attacks the player!");
             attackTimer = attackCooldown;
+            SoundManager.Instance.PlaySFX(3);
+
         }
         else
         {

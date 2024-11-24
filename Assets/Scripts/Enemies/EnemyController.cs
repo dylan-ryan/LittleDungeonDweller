@@ -137,6 +137,7 @@ public class EnemyController : MonoBehaviour
             Debug.Log("Enemy attacks the player!");
             attackTimer = attackCooldown;
             firstStrike = true;
+            SoundManager.Instance.PlaySFX(1);
         }
         if (attackTimer <= 0f)
         {
@@ -145,6 +146,7 @@ public class EnemyController : MonoBehaviour
             playerHealth.TakeDamage(attackDamage);
             Debug.Log("Enemy attacks the player!");
             attackTimer = attackCooldown;
+            SoundManager.Instance.PlaySFX(1);
         }
     }
 

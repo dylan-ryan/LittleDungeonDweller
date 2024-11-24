@@ -138,6 +138,7 @@ public class GoblinController : MonoBehaviour
             Debug.Log("Enemy attacks the player!");
             attackTimer = attackCooldown;
             firstStrike = true;
+            SoundManager.Instance.PlaySFX(2);
         }
         if (attackTimer <= 0f)
         {
@@ -145,6 +146,8 @@ public class GoblinController : MonoBehaviour
             FireArrow();
             Debug.Log("Enemy attacks the player!");
             attackTimer = attackCooldown;
+            SoundManager.Instance.PlaySFX(2);
+
         }
     }
 

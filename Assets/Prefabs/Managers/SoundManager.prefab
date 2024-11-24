@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4883973660805544116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8541958706890518700}
+  - component: {fileID: 3682972302868344068}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8541958706890518700
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883973660805544116}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3682972302868344068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883973660805544116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05ebfd143d9d9a459d9676c30ef122f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 37b4d78b6e52dbf44b000aa5d06abaa5, type: 2}
+  musicVolumeParameter: Music_Volume
+  sfxVolumeParameter: SFX_Volume
+  musicTracks:
+  - {fileID: 8300000, guid: 8bbeef2e25c30754d825e0eb163485ca, type: 3}
+  - {fileID: 8300000, guid: 5707356f116629c48994fbae3b9f0f1b, type: 3}
+  soundEffects:
+  - {fileID: 8300000, guid: 1577d6574cdceaf41a249af0f90f12cc, type: 3}
+  - {fileID: 8300000, guid: e04f6ae65d6a6564ea77dcb249958bbb, type: 3}
+  - {fileID: 8300000, guid: 8805fc46e52c302429a91ad4bdb0c622, type: 3}
+  - {fileID: 8300000, guid: ca8f6e49d61971945807d39f4dbc5422, type: 3}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}

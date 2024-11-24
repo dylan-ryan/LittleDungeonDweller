@@ -115,6 +115,7 @@ public class CharacterControllerScript : MonoBehaviour
             {
                 Attack();
                 cooldownTimer = attackCooldown;
+                SoundManager.Instance.PlaySFX(0);
             }
         }
 
