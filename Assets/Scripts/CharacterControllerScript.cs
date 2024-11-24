@@ -26,6 +26,7 @@ public class CharacterControllerScript : MonoBehaviour
     public int attackDamage = 1;
     public float attackCooldown = 2f;
     [SerializeField] private Sprite attackSprite;
+    [SerializeField] private Sprite swordSwipe;
     [SerializeField] private Sprite defaultSprite; 
 
     [Header("Unity Layer Enemies Are On")]
@@ -148,6 +149,8 @@ public class CharacterControllerScript : MonoBehaviour
         Debug.DrawRay(transform.position, lastMoveDirection * swordRange, Color.red, 2f);
         Debug.DrawLine(transform.position, swipeCenter, Color.blue, 2f);
 
+        InstantiateAttackSprite(swipeCenter);
+
         Collider[] hitColliders = Physics.OverlapSphere(swipeCenter, swordRadius, enemyLayer);
 
         if (hitColliders.Length > 0)
@@ -164,6 +167,22 @@ public class CharacterControllerScript : MonoBehaviour
             Debug.Log("Missed");
         }
     }
+
+    private void InstantiateAttackSprite(Vector3 position)
+    {
+        GameObject attackVisual = new GameObject("AttackSprite");
+        SpriteRenderer attackRenderer = attackVisual.AddComponent<SpriteRenderer>();
+        attackRenderer.sprite = swordSwipe;
+        attackRenderer.sortingOrder = 1;
+
+        attackVisual.transform.position = position;
+        float angle = Mathf.Atan2(lastMoveDirection.z, lastMoveDirection.x) * Mathf.Rad2Deg;
+        attackVisual.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        Destroy(attackVisual, 0.2f);
+    }
+
+
 
     private void ResetSprite()
     {

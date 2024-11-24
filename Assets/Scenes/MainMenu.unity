@@ -11000,6 +11000,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 747686691}
     - target: {fileID: 8377574662390431058, guid: 3fba8dcc3e0660c4b955558c10470155, type: 3}
+      propertyPath: swordSwipe
+      value: 
+      objectReference: {fileID: 21300000, guid: f44066c2ff8fa16489da8dc8dad9aa73, type: 3}
+    - target: {fileID: 8377574662390431058, guid: 3fba8dcc3e0660c4b955558c10470155, type: 3}
       propertyPath: cooldownImage
       value: 
       objectReference: {fileID: 2101517346}
