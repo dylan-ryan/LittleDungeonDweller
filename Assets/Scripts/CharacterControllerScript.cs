@@ -35,6 +35,9 @@ public class CharacterControllerScript : MonoBehaviour
     [Header("UI Cooldown Indicator")]
     [SerializeField] private Image cooldownImage;
 
+    [Header("Health Bar UI")]
+    [SerializeField] private Slider healthSlider;
+
     private float gravity = -10f;
     private float groundCheckDistance = 0.1f;
     private Vector3 velocity;
@@ -61,6 +64,8 @@ public class CharacterControllerScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+
     }
 
     private void Start()
@@ -131,6 +136,11 @@ public class CharacterControllerScript : MonoBehaviour
                 Attack();
                 cooldownTimer = attackCooldown;
             }
+        }
+
+        if (healthSlider != null)
+        {
+            healthSlider.value = healthSystem.health;
         }
     }
 
