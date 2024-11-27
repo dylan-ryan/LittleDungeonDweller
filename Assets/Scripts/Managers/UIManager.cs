@@ -128,10 +128,10 @@ public class UIManager : MonoBehaviour
         character.GetComponent<HealthSystem>().enabled = false;
 
         if (currencyGainedText != null)
-            currencyGainedText.text = "Currency Gained: " + gameManager.currencyGainedLastRun.ToString();
+            currencyGainedText.text = "= " + gameManager.currencyGainedLastRun.ToString();
 
         if (enemiesKilledText != null)
-            enemiesKilledText.text = "Enemies Killed: " + gameManager.enemiesKilledLastRun.ToString();
+            enemiesKilledText.text = "= " + gameManager.enemiesKilledLastRun.ToString();
     }
 
 
