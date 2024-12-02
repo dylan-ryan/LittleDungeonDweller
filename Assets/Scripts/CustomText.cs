@@ -23,11 +23,6 @@ public class CustomText : MonoBehaviour
     void Update()
     {
         gameManager = FindObjectOfType<GameManager>();
-        text.SetText(
-            "Currency: " + gameManager.currency + "        " +
-            "Health: " + health.health + "      " +
-            "Speed: " + characterStats.moveSpeed + "      " +
-            "Damage: " + characterStats.attackDamage + "     " +
-            "Attack Cooldown: " + characterStats.attackCooldown.ToString("0.0"));
+        text.SetText("= " + gameManager.currency);
     }
 }
