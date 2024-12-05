@@ -657,7 +657,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &131243053
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12369,13 +12369,45 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6746665891757781517, guid: 90ab9d050c0ef234ba3e41261e158353, type: 3}
+      propertyPath: damageButton
+      value: 
+      objectReference: {fileID: 1694323393}
+    - target: {fileID: 6746665891757781517, guid: 90ab9d050c0ef234ba3e41261e158353, type: 3}
+      propertyPath: healthButton
+      value: 
+      objectReference: {fileID: 1011525223}
+    - target: {fileID: 6746665891757781517, guid: 90ab9d050c0ef234ba3e41261e158353, type: 3}
       propertyPath: moveSpeedPrice
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6746665891757781517, guid: 90ab9d050c0ef234ba3e41261e158353, type: 3}
+      propertyPath: moveSpeedButton
+      value: 
+      objectReference: {fileID: 733226870}
+    - target: {fileID: 6746665891757781517, guid: 90ab9d050c0ef234ba3e41261e158353, type: 3}
       propertyPath: attackSpeedPrice
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6746665891757781517, guid: 90ab9d050c0ef234ba3e41261e158353, type: 3}
+      propertyPath: attackSpeedButton
+      value: 
+      objectReference: {fileID: 894374110}
+    - target: {fileID: 6746665891757781517, guid: 90ab9d050c0ef234ba3e41261e158353, type: 3}
+      propertyPath: disabledDamageSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2704faebb562fe84eb24a59fc0df5142, type: 3}
+    - target: {fileID: 6746665891757781517, guid: 90ab9d050c0ef234ba3e41261e158353, type: 3}
+      propertyPath: disabledHealthSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d56f6c6ba28810b48baf739855b29ac3, type: 3}
+    - target: {fileID: 6746665891757781517, guid: 90ab9d050c0ef234ba3e41261e158353, type: 3}
+      propertyPath: disabledMoveSpeedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c97aad3e84c7d2240b4a82e902b008fd, type: 3}
+    - target: {fileID: 6746665891757781517, guid: 90ab9d050c0ef234ba3e41261e158353, type: 3}
+      propertyPath: disabledAttackSpeedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 32d584b1a00f97741b96cdc63187b877, type: 3}
     - target: {fileID: 7179315066124261584, guid: 90ab9d050c0ef234ba3e41261e158353, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

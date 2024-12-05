@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,11 +28,20 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int healthUpgradeCount = 0;
     [HideInInspector] public const int maxUpgrades = 5;
 
+    [Header("Enabled Buttons")]
+    public Button damageButton;
+    public Button attackSpeedButton;
+    public Button moveSpeedButton;
+    public Button healthButton;
 
+    [Header("Disabled Buttons")]
+    public Sprite disabledDamageSprite;
+    public Sprite disabledAttackSpeedSprite;
+    public Sprite disabledMoveSpeedSprite;
+    public Sprite disabledHealthSprite;
 
     void Awake()
     {
-        //If GameManager doesn't exist set this as the manager and don't destroy on load
         if (manager == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -77,6 +84,7 @@ public class GameManager : MonoBehaviour
 
             if (damageUpgradeCount >= maxUpgrades)
             {
+                DisableButton(damageButton, disabledDamageSprite);
                 Debug.Log("Max damage upgrades reached.");
             }
         }
@@ -93,6 +101,7 @@ public class GameManager : MonoBehaviour
 
             if (attackSpeedUpgradeCount >= maxUpgrades)
             {
+                DisableButton(attackSpeedButton, disabledAttackSpeedSprite);
                 Debug.Log("Max attack speed upgrades reached.");
             }
         }
@@ -109,6 +118,7 @@ public class GameManager : MonoBehaviour
 
             if (moveSpeedUpgradeCount >= maxUpgrades)
             {
+                DisableButton(moveSpeedButton, disabledMoveSpeedSprite);
                 Debug.Log("Max move speed upgrades reached.");
             }
         }
@@ -125,8 +135,22 @@ public class GameManager : MonoBehaviour
 
             if (healthUpgradeCount >= maxUpgrades)
             {
+                DisableButton(healthButton, disabledHealthSprite);
                 Debug.Log("Max health upgrades reached.");
             }
+        }
+    }
+
+    private void DisableButton(Button button, Sprite disabledSprite)
+    {
+        if (button != null)
+        {
+            Image buttonImage = button.GetComponent<Image>();
+            if (buttonImage != null)
+            {
+                buttonImage.sprite = disabledSprite;
+            }
+            button.interactable = false;
         }
     }
 }
