@@ -657,7 +657,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &131243053
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1399,7 +1399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 209.33}
+  m_AnchoredPosition: {x: 0, y: 255.2}
   m_SizeDelta: {x: 166.9, y: 40.81}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &288954774
@@ -8783,7 +8783,7 @@ RectTransform:
   m_Father: {fileID: 878077767}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10037,7 +10037,7 @@ RectTransform:
   m_Father: {fileID: 1845416702}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 4.9999995, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10247,7 +10247,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -31.2, y: 185}
+  m_AnchoredPosition: {x: -31.2, y: 208.9}
   m_SizeDelta: {x: 241.8, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1567445382
@@ -13654,7 +13654,7 @@ RectTransform:
   m_Father: {fileID: 1403495953}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -14756,7 +14756,7 @@ PrefabInstance:
       objectReference: {fileID: 885530236}
     - target: {fileID: 5093095138815176272, guid: ac92793709d13974aa178c128c5ed4b6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5145154679523109637, guid: ac92793709d13974aa178c128c5ed4b6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -15144,6 +15144,14 @@ PrefabInstance:
       propertyPath: musicSlider
       value: 
       objectReference: {fileID: 2048388173}
+    - target: {fileID: 3682972302868344068, guid: 90daa1312d8b8644d85e088fd67d088f, type: 3}
+      propertyPath: soundEffects.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3682972302868344068, guid: 90daa1312d8b8644d85e088fd67d088f, type: 3}
+      propertyPath: soundEffects.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 574f5d7f5a468b94d93944e90caaa69e, type: 3}
     - target: {fileID: 4883973660805544116, guid: 90daa1312d8b8644d85e088fd67d088f, type: 3}
       propertyPath: m_Name
       value: SoundManager

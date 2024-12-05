@@ -80,6 +80,12 @@ public class SoundManager : MonoBehaviour
     {
         if (trackIndex >= 0 && trackIndex < musicTracks.Length)
         {
+            if (musicSource.clip == musicTracks[trackIndex] && musicSource.isPlaying)
+            {
+                Debug.Log("The track is already playing.");
+                return;
+            }
+
             musicSource.clip = musicTracks[trackIndex];
             musicSource.Play();
         }
@@ -88,6 +94,7 @@ public class SoundManager : MonoBehaviour
             Debug.LogWarning("Invalid music track index.");
         }
     }
+
 
     public void PlaySFX(int sfxIndex)
     {

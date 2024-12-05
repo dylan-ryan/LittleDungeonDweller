@@ -23,6 +23,7 @@ public class CoinScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            SoundManager.Instance.PlaySFX(4);
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             gameManager.AddCurrency(worth);
             Destroy(gameObject);
