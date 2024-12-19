@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4028383, y: 1.4028383, z: 1.4028383}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4757493846829494124}
@@ -78,17 +78,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objRenderer: {fileID: 0}
   controlsEnabled: 0
+  arrow: {fileID: 0}
+  mainCamera: {fileID: 0}
   moveSpeed: 10
   swordRadius: 1.5
   swordRange: 2
   attackDamage: 1
   attackCooldown: 1
   attackSprite: {fileID: 21300000, guid: 0d772b6a2caf2364cb3cdedf67e40a0a, type: 3}
+  swordSwipe: {fileID: 0}
   defaultSprite: {fileID: -148439865, guid: 235f7fd14e9f1c8489cd642ee1b532e2, type: 3}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
   cooldownImage: {fileID: 0}
+  healthSlider: {fileID: 0}
 --- !u!114 &5521104581653047601
 MonoBehaviour:
   m_ObjectHideFlags: 0
